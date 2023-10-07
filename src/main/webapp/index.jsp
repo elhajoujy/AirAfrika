@@ -9,7 +9,8 @@
     h1
 </style>
 <body>
-<h1><%= "Hello World! AirAfraik" %>
+
+<h1><%= "Start point of the applicat ion! AirAfraik" %>
 </h1>
 <br/>
 <a href="hello-airafraik">Hello Servlet</a>

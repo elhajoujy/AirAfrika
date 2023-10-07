@@ -1,4 +1,4 @@
-package ma.yc.airafraik;
+package ma.yc.airafraik.web;
 
 import java.io.*;
 
@@ -11,7 +11,7 @@ public class HelloServlet extends HttpServlet {
     private String message;
 
     public void init() {
-        message = "Hello World! Air Afraik";
+        message = " start point v2 here HelloServeltController ! Air Afraik";
     }
 
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {

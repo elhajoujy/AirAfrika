@@ -4,11 +4,10 @@ services:
   airafraik:
     image: postgres
     environment:
-      POSTGRES_USER: ${DATABASE}
+      POSTGRES_USER: ${USER}
       POSTGRES_PASSWORD: ${PASSWORD}
       POSTGRES_DB: ${DATABASE}
       PGUSER: ${USER}
-      PGCONNECT_TMIEOUT: 300
       PGDATA: /data/postgres
     volumes:
       - db:/data/postgres

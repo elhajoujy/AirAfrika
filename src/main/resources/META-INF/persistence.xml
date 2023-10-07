@@ -3,7 +3,49 @@
              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
              xsi:schemaLocation="https://jakarta.ee/xml/ns/persistence https://jakarta.ee/xml/ns/persistence/persistence_3_0.xsd"
              version="3.0">
-    <persistence-unit name="default">
+    <persistence-unit name="default" transaction-type="RESOURCE_LOCAL" >
+        <description>
+            Persistence unit for the JPA tutorial of the Hibernate Getting Started Guide
+        </description>
+        <provider >org.hibernate.jpa.HibernatePersistenceProvider</provider>
+        <class>ma.yc.airafraik.entites.LogEntity</class>
+        <class>ma.yc.airafraik.entites.AdministrateurEntity</class>
+        <class>ma.yc.airafraik.entites.AeroportEntity</class>
+        <class>ma.yc.airafraik.entites.ClientEntity</class>
+        <class>ma.yc.airafraik.entites.PaymentEntity</class>
+        <class>ma.yc.airafraik.entites.ReservationEntity</class>
+        <class>ma.yc.airafraik.entites.ReservationVolEntity</class>
+        <class>ma.yc.airafraik.entites.SocieteAerienneEntity</class>
+        <class>ma.yc.airafraik.entites.VilleEntity</class>
+        <class>ma.yc.airafraik.entites.VilleImagEntity</class>
+        <class>ma.yc.airafraik.entites.VolEntity</class>
+        <class>ma.yc.airafraik.entites.VolExtrasEntity</class>
+
+        <properties>
+            <property name="hibernate.connection.driver_class" value="org.postgresql.Driver"/>
+            <property name="jakarta.persistence.jdbc.url" value="jdbc:postgresql://127.0.0.1:5332/AIRAFRIK"/>
+            <property name="jakarta.persistence.jdbc.user" value="pc"/>
+            <property name="jakarta.persistence.jdbc.password" value="password"/>
+            <property name="jakarta.persistence.schema-generation.database.action" value="none"/>
+            <property name="toplink.jdbc.url" value="jdbc:postgresql://127.0.0.1:5332/AIRAFRIK"/>
+            <property name="toplink.jdbc.driver" value="org.postgresql.Driver"/>
+            <property name="toplink.jdbc.user" value="pc"/>
+            <property name="toplink.jdbc.password" value="password"/>
+            <property name="hibernate.connection.url" value="jdbc:postgresql://127.0.0.1:5332/AIRAFRIK"/>
+            <property name="hibernate.connection.username" value="pc"/>
+            <property name="hibernate.connection.password" value="password"/>
+            <property name="hibernate.dialect" value="org.hibernate.dialect.PostgreSQLDialect"/>
+            <property name="hibernate.show_sql" value="true"/>
+            <property name="openjpa.ConnectionURL" value="jdbc:postgresql://127.0.0.1:5332/AIRAFRIK"/>
+            <property name="openjpa.ConnectionDriverName" value="org.postgresql.Driver"/>
+            <property name="openjpa.ConnectionUserName" value="pc"/>
+            <property name="openjpa.ConnectionPassword" value="password"/>
+            <property name="eclipselink.jdbc.url" value="jdbc:postgresql://127.0.0.1:5332/AIRAFRIK"/>
+            <property name="eclipselink.jdbc.driver" value="org.postgresql.Driver"/>
+            <property name="eclipselink.jdbc.user" value="pc"/>
+            <property name="eclipselink.jdbc.password" value="password"/>
+        </properties>
 
     </persistence-unit>
+
 </persistence>

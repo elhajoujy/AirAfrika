@@ -29,7 +29,7 @@ public class ReservationEntity {
     //TODO : CLIENT RESERVE PLUSIERE
     @ManyToOne
     @JoinColumn(name = "client_id")
-    private ClientEntity clientEntity ;
+    private ClientEntity client ;
 
     @Column(name = "date_depart")
     private String dateDepart;

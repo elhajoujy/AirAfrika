@@ -33,7 +33,7 @@ public class ClientEntity {
     private String password ;
     private String profile_image;
 
-    @OneToMany(mappedBy = "CLIENT",cascade = CascadeType.ALL,fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "client",cascade = CascadeType.ALL,fetch = FetchType.EAGER)
     private Collection<ReservationEntity> reservationEntities = new ArrayList<>();
 
 }

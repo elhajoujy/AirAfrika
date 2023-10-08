@@ -16,7 +16,7 @@ import java.util.Collection;
 @Builder
 @Log
 @Entity
-@Table(name = "SOCIETE_AERINNE")
+@Table(name = "societe_aerienne")
 public class SocieteAerienneEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -24,8 +24,9 @@ public class SocieteAerienneEntity {
     private String code ;
     private String adresse ;
     private String telephone;
+    private String nom;
     private String logo;
 
-    @OneToMany(mappedBy ="SOCIETE_AERINNE", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy ="societeAerienneEntity", cascade = CascadeType.ALL)
     private Collection<VolEntity> volEntities = new ArrayList<>();
 }

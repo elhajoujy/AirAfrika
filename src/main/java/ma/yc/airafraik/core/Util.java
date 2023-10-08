@@ -4,13 +4,16 @@ import java.util.Date;
 import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import ma.yc.airafraik.entites.SocieteAerienneEntity;
+import ma.yc.airafraik.entites.VolEntity;
 import org.mindrot.jbcrypt.BCrypt;
 
 
 public class Util {
     private static final String CHARACTERS = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
 
-    public static long generatedLong() {
+    public static Long generatedLong() {
         long leftLimit = 1L;
         long rightLimit = 100000000L;
         return leftLimit + (long) (Math.random() * (rightLimit - leftLimit));
@@ -90,6 +93,31 @@ public class Util {
             age--;
         }
         return age;
+    }
+
+    public static SocieteAerienneEntity getSocieteAerienneEntity() {
+        SocieteAerienneEntity societeAerienneEntity = new SocieteAerienneEntity();
+        societeAerienneEntity.setCode("Air-Afraik-"+Util.generatedLong().toString());
+        societeAerienneEntity.setNom("Air Afraik");
+        societeAerienneEntity.setAdresse("Casablanca Maroc 3937 2");
+        societeAerienneEntity.setTelephone("0522 22 22 22");
+        societeAerienneEntity.setLogo("https://res.cloudinary.com/zenbusiness/q_auto/v1/logaster/logaster-2019-02-0093-h-air-tran-airways-logo-15.png");
+        return societeAerienneEntity;
+    }
+
+    public static VolEntity getVolEntity() {
+        VolEntity vol = new VolEntity();
+        vol.setCode("VOL-"+Util.generatedLong().toString());
+        vol.setPrix(1000);
+        vol.setNomberDePlaces(33);
+        vol.setDateDepart("2021-05-12");
+        vol.setHeureDepart("12:00");
+        vol.setDateArrive("2021-05-12");
+        vol.setHeureArrivee("14:00");
+        vol.setVilleDepart("Casablanca");
+        vol.setVilleArrivee("Rabat");
+
+        return vol;
     }
 
     //add more helper method

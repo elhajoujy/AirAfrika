@@ -1,10 +1,7 @@
 package ma.yc.airafraik.entites;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import lombok.extern.java.Log;
 
 import java.sql.Timestamp;
@@ -18,6 +15,7 @@ import java.util.Collection;
 @Log
 @Entity
 @Table(name = "reservation")
+@ToString
 public class ReservationEntity {
     @Id
     private int Id ;

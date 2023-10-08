@@ -1,129 +1,35 @@
 package ma.yc.airafraik.entites;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.Pattern;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.extern.java.Log;
 
-@Entity
-@Table(name = "administrateur", schema = "public", catalog = "AIRAFRIK")
+@AllArgsConstructor
+@NoArgsConstructor
+@Data
+@Builder
+@Log
+@Entity(name = "administrateur")
 public class AdministrateurEntity {
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
-    @Column(name = "id")
-    private int id;
-    @Basic
-    @Column(name = "code")
-    private String code;
-    @Basic
-    @Column(name = "nom")
-    private String nom;
-    @Basic
-    @Column(name = "prenom")
-    private String prenom;
-    @Basic
-    @Column(name = "adresse")
-    private String adresse;
-    @Basic
-    @Column(name = "email")
-    private String email;
-    @Basic
-    @Column(name = "telephone")
-    private String telephone;
-    @Basic
-    @Column(name = "password")
-    private String password;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private String id ;
 
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getCode() {
-        return code;
-    }
-
-    public void setCode(String code) {
-        this.code = code;
-    }
-
-    public String getNom() {
-        return nom;
-    }
-
-    public void setNom(String nom) {
-        this.nom = nom;
-    }
-
-    public String getPrenom() {
-        return prenom;
-    }
-
-    public void setPrenom(String prenom) {
-        this.prenom = prenom;
-    }
-
-    public String getAdresse() {
-        return adresse;
-    }
-
-    public void setAdresse(String adresse) {
-        this.adresse = adresse;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getTelephone() {
-        return telephone;
-    }
-
-    public void setTelephone(String telephone) {
-        this.telephone = telephone;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    @Override
-    public boolean equals(Object object) {
-        if (this == object) return true;
-        if (object == null || getClass() != object.getClass()) return false;
-
-        AdministrateurEntity that = (AdministrateurEntity) object;
-
-        if (id != that.id) return false;
-        if (code != null ? !code.equals(that.code) : that.code != null) return false;
-        if (nom != null ? !nom.equals(that.nom) : that.nom != null) return false;
-        if (prenom != null ? !prenom.equals(that.prenom) : that.prenom != null) return false;
-        if (adresse != null ? !adresse.equals(that.adresse) : that.adresse != null) return false;
-        if (email != null ? !email.equals(that.email) : that.email != null) return false;
-        if (telephone != null ? !telephone.equals(that.telephone) : that.telephone != null) return false;
-        if (password != null ? !password.equals(that.password) : that.password != null) return false;
-
-        return true;
-    }
-
-    @Override
-    public int hashCode() {
-        int result = id;
-        result = 31 * result + (code != null ? code.hashCode() : 0);
-        result = 31 * result + (nom != null ? nom.hashCode() : 0);
-        result = 31 * result + (prenom != null ? prenom.hashCode() : 0);
-        result = 31 * result + (adresse != null ? adresse.hashCode() : 0);
-        result = 31 * result + (email != null ? email.hashCode() : 0);
-        result = 31 * result + (telephone != null ? telephone.hashCode() : 0);
-        result = 31 * result + (password != null ? password.hashCode() : 0);
-        return result;
-    }
+    private String code ;
+    private String nom ;
+    private String prenom ;
+    private String adresse ;
+    @Email
+    private String email ;
+    @Pattern(regexp="(^$|[0-9]{10})")
+    private String telephone ;
+    private String password ;
 }

@@ -4,8 +4,11 @@ import java.util.Date;
 import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import org.mindrot.jbcrypt.BCrypt;
+
 
 public class Util {
+    private static final String CHARACTERS = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
 
     public static long generatedLong() {
         long leftLimit = 1L;
@@ -17,6 +20,9 @@ public class Util {
     public static Date readDate(String key , Scanner scanner){
         Print.log(key+" : ");
         return new Date(scanner.nextLong());
+    }
+    public static String hasString(String value){
+        return BCrypt.hashpw(value, BCrypt.gensalt());
     }
 
     public static  double readDouble(String key , Scanner scanner){

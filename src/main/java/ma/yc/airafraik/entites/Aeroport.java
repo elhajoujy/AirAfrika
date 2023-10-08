@@ -1,4 +1,4 @@
 package ma.yc.airafraik.entites;
 
-public class PaymentEntity {
+public class Aeroport {
 }

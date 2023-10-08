@@ -5,7 +5,8 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.EntityTransaction;
 import jakarta.persistence.Persistence;
-import ma.yc.airafraik.entites.LogEntity;
+import ma.yc.airafraik.Helper.FakeEntitesHelper;
+import ma.yc.airafraik.entites.*;
 
 import java.util.List;
 
@@ -17,15 +18,25 @@ public class Main {
 
         try{
             transaction.begin();
-//            LogEntity logEntity = new LogEntity();
-//            logEntity.setLogDate(new java.sql.Timestamp(new java.util.Date().getTime()));
-//            logEntity.setLogKey("key");
-//            logEntity.setLogMessage("this is the second message trying to log everything to database");
-//            logEntity.setLogLevel("level");
-//            entityManager.persist(logEntity);
-            LogEntity logEntity = entityManager.find(LogEntity.class, 1);
-            System.out.println(logEntity.getLogMessage());
-            List<LogEntity> logEntities = entityManager.createQuery("SELECT l FROM LogEntity l", LogEntity.class).getResultList();
+
+//            LogEntity logEntity = FakeEntitesHelper.getLogEntity();
+//
+//            ClientEntity clientEntity = FakeEntitesHelper.getClientEntity();
+//
+//            AdministrateurEntity administrateurEntity = FakeEntitesHelper.getAdministrateurEntity();
+//
+//            VilleEntity ville = FakeEntitesHelper.getVilleEntity();
+//
+//            entityManager.persist(ville);
+//
+//            for (VilleImageEntity imageEntity : ville.getImageEntities()) {
+//                entityManager.persist(imageEntity);
+//            }
+
+            //TODO : ENGS : SOCIETE
+
+
+
             transaction.commit();
 
         }finally {

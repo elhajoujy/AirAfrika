@@ -14,16 +14,13 @@ import lombok.extern.java.Log;
 @Builder
 @Log
 @Entity
-@Table(name = "vol_extras")
-public class VolExtrasEntity {
+@Table(name = "VILLE_IMAGE")
+public class VilleImageEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id ;
-    private String type ;
-    private double prix ;
-    private String description ;
-
+    private String image ;
     @ManyToOne
-    @JoinColumn(name = "vol_id")
-    private VolEntity volEntity ;
+    @JoinColumn(name = "ville_id") // Specify the join column
+    private VilleEntity ville ;
 }

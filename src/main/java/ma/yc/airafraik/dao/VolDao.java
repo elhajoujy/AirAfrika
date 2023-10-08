@@ -23,5 +23,5 @@ public interface VolDao {
 
     public VolEntity consulterVol();
     public Collection<VolEntity> consulterVols(HashMap<String, String> conditions);
-    public boolean consulterVols();
+    public Collection<VolEntity> consulterVols();
 }

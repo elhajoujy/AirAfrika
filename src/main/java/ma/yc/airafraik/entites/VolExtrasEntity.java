@@ -2,10 +2,7 @@ package ma.yc.airafraik.entites;
 
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import lombok.extern.java.Log;
 
 @AllArgsConstructor
@@ -15,6 +12,7 @@ import lombok.extern.java.Log;
 @Log
 @Entity
 @Table(name = "vol_extras")
+@ToString
 public class VolExtrasEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -1,10 +1,7 @@
 package ma.yc.airafraik.entites;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import lombok.extern.java.Log;
 
 import java.util.ArrayList;
@@ -12,7 +9,8 @@ import java.util.Collection;
 
 @AllArgsConstructor
 @NoArgsConstructor
-@Data
+@Setter
+@Getter
 @Builder
 @Log
 @Entity
@@ -41,11 +39,11 @@ public class VolEntity {
 
     private double prix ;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "societe_aerienne_id")
-    private SocieteAerienneEntity societeAerienneEntity ;
+    private SocieteAerienneEntity societeAerienneEntity = null ;
 
-    @OneToMany(mappedBy ="vol", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy ="vol", cascade = CascadeType.ALL , fetch = FetchType.LAZY)
     private Collection<VolExtrasEntity> volExtrasEntities = new ArrayList<>();
 
     @ManyToMany
@@ -55,6 +53,26 @@ public class VolEntity {
             inverseJoinColumns = { @JoinColumn(name = "reservation_code") }
     )
     private Collection<ReservationEntity> reservationEntities = new ArrayList<>();
+
+
+    @Override
+    public String toString() {
+        return "VolEntity{" +
+                "id=" + id +
+                ", code='" + code + '\'' +
+                ", heureDepart='" + heureDepart + '\'' +
+                ", heureArrivee='" + heureArrivee + '\'' +
+                ", dateDepart='" + dateDepart + '\'' +
+                ", dateArrive='" + dateArrive + '\'' +
+                ", villeDepart='" + villeDepart + '\'' +
+                ", villeArrivee='" + villeArrivee + '\'' +
+                ", nomberDePlaces=" + nomberDePlaces +
+                ", prix=" + prix +
+                ", societeAerienneEntity=" + societeAerienneEntity.toString() +
+//                ", volExtrasEntities=" + volExtrasEntities +
+//                ", reservationEntities=" + reservationEntities +
+                '}';
+    }
 
     //TODO : JE PEUX ENRGISTER  LES VILLE DEPART ET ARRIVE ETQ OBJET
     //TODO : AUSSI LES INFORMATION DE AERPORT ;

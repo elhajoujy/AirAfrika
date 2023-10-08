@@ -2,6 +2,7 @@ package ma.yc.airafraik.dao.Impl;
 
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityTransaction;
+import jakarta.persistence.TypedQuery;
 import ma.yc.airafraik.connection.HyperJpa;
 import ma.yc.airafraik.dao.VolDao;
 import ma.yc.airafraik.entites.VolEntity;
@@ -164,7 +165,13 @@ public class VolDaoImpl implements VolDao {
     }
 
     @Override
-    public boolean consulterVols() {
-        return false;
+    public Collection<VolEntity> consulterVols() {
+        EntityManager entityManager = this.hyperJpa.getEntityManager();
+        String jpql = "SELECT v FROM VolEntity v";
+        TypedQuery<VolEntity> query = entityManager.createQuery(jpql, VolEntity.class);
+        Collection<VolEntity> volEntities = query.getResultList();
+        return volEntities;
     }
+
+
 }

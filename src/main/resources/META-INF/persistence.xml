@@ -11,6 +11,23 @@
 
         <class>ma.yc.airafraik.entites.LogEntity</class>
         <class>ma.yc.airafraik.entites.ClientEntity</class>
+        <class>ma.yc.airafraik.entites.VolEntity</class>
+        <class>ma.yc.airafraik.entites.ReservationEntity</class>
+        <class>ma.yc.airafraik.entites.VilleImageEntity</class>
+        <class>ma.yc.airafraik.entites.VilleEntity</class>
+        <class>ma.yc.airafraik.entites.AeroportEntity</class>
+        <class>ma.yc.airafraik.entites.VolExtrasEntity</class>
+        <class>ma.yc.airafraik.entites.AdministrateurEntity</class>
+        <class>ma.yc.airafraik.entites.PaymentEntity</class>
+        <class>ma.yc.airafraik.entites.SocieteAerienneEntity</class>
+
+
+
+
+
+
+
+
         <properties>
             <property name="hibernate.connection.driver_class" value="org.postgresql.Driver"/>
             <property name="jakarta.persistence.jdbc.url" value="jdbc:postgresql://127.0.0.1:5332/AIRAFRIK"/>

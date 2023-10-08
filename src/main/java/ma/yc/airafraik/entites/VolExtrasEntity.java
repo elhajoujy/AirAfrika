@@ -25,5 +25,5 @@ public class VolExtrasEntity {
 
     @ManyToOne
     @JoinColumn(name = "vol_id")
-    private VolEntity volEntity ;
+    private VolEntity vol ;
 }

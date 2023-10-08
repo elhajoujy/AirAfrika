@@ -1,4 +1,7 @@
-# AIRAFRAIK
+# AIRAFRAIK  
+
+![AIRAFRIK LOGO](./assets/airafrik-logo-yellow.svg)
+
 
 ## Description
     infromation about the project will be here ... 

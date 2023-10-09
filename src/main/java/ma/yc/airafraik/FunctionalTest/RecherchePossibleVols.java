@@ -26,15 +26,13 @@ public class RecherchePossibleVols {
 
 
 
-    public static ArrayList<VolEntity> filterVolsParPourLesConditions(ArrayList<VolEntity> vols){
+    public static ArrayList<VolEntity> filterVolsParPourLesConditions(){
         HashMap<String , String> conditions = new HashMap<>();
+        VolDao volDao = new VolDaoImpl();
 
         conditions.put("villeDepart" , villeDepart);
         conditions.put("villeArrivee" , villeArrivee);
-        ArrayList<VolEntity>vols =  volDao.consulterVols(conditions);
-
-        ArrayList<VolEntity> filteredVols = filterVolsParPourLesConditions(vols);
-        Print.log(filteredVols.size());
+        ArrayList<VolEntity> vols =  volDao.consulterVols(conditions);
 
         ArrayList<VolEntity> filteredVols = new ArrayList<>();
         Print.log(vols.size());

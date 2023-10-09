@@ -2,6 +2,7 @@ package ma.yc.airafraik.dao;
 
 import ma.yc.airafraik.entites.VolEntity;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 
@@ -22,6 +23,6 @@ public interface VolDao {
     public boolean supprimerVols(VolEntity[] vols);
 
     public VolEntity consulterVol();
-    public Collection<VolEntity> consulterVols(HashMap<String, String> conditions);
+    public ArrayList<VolEntity> consulterVols(HashMap<String, String> conditions);
     public Collection<VolEntity> consulterVols();
 }

@@ -4,10 +4,13 @@
              xsi:schemaLocation="https://jakarta.ee/xml/ns/persistence https://jakarta.ee/xml/ns/persistence/persistence_3_0.xsd"
              version="3.0">
     <persistence-unit name="default" transaction-type="RESOURCE_LOCAL" >
+
         <description>
             Persistence unit for the JPA tutorial of the Hibernate Getting Started Guide
         </description>
         <provider >org.hibernate.jpa.HibernatePersistenceProvider</provider>
+
+
 
         <class>ma.yc.airafraik.entites.LogEntity</class>
         <class>ma.yc.airafraik.entites.ClientEntity</class>
@@ -20,11 +23,6 @@
         <class>ma.yc.airafraik.entites.AdministrateurEntity</class>
         <class>ma.yc.airafraik.entites.PaymentEntity</class>
         <class>ma.yc.airafraik.entites.SocieteAerienneEntity</class>
-
-
-
-
-
 
 
 

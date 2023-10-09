@@ -2,11 +2,15 @@ package ma.yc.airafraik.dao.Impl;
 
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityTransaction;
+import jakarta.persistence.Query;
 import jakarta.persistence.TypedQuery;
+import jakarta.transaction.Transactional;
 import ma.yc.airafraik.connection.HyperJpa;
+import ma.yc.airafraik.core.Print;
 import ma.yc.airafraik.dao.VolDao;
 import ma.yc.airafraik.entites.VolEntity;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 
@@ -139,8 +143,29 @@ public class VolDaoImpl implements VolDao {
         return false;
     }
 
+
     @Override
     public boolean supprimerVol(VolEntity vol) {
+        try{
+            transaction.begin();
+            Query query = entityManager.createQuery("DELETE FROM VolEntity v WHERE v.code = :code");
+            query.setParameter("code", vol.getCode());
+
+            if (query.executeUpdate() > 0) {
+                Print.log("Vol supprimé avec succès");
+                transaction.commit();
+                return true;
+            }
+            Print.log("Erreur lors de la suppression du vol");
+            transaction.rollback();
+        }catch (Exception e){
+            if (transaction != null && transaction.isActive()) {
+                transaction.rollback(); // Rollback the transaction in case of an exception
+            }
+        }finally {
+            this.entityManager.close();
+        }
+
         return false;
     }
 
@@ -160,13 +185,24 @@ public class VolDaoImpl implements VolDao {
     }
 
     @Override
-    public Collection<VolEntity> consulterVols(HashMap<String, String> conditions) {
-        return null;
+    public ArrayList<VolEntity> consulterVols(HashMap<String, String> conditions) {
+//        EntityManager entityManager = this.hyperJpa.getEntityManager();
+        String jpql = "SELECT v FROM VolEntity v WHERE ";
+        for (String key : conditions.keySet()) {
+            jpql += "v." + key + " = '" + conditions.get(key) + "' AND ";
+        }
+        //remove the last AND
+        jpql = jpql.substring(0, jpql.length() - 4);
+
+        TypedQuery<VolEntity> query = entityManager.createQuery(jpql, VolEntity.class);
+        ArrayList<VolEntity> volEntities = (ArrayList<VolEntity>) query.getResultList();
+
+        return volEntities;
     }
 
     @Override
     public Collection<VolEntity> consulterVols() {
-        EntityManager entityManager = this.hyperJpa.getEntityManager();
+//        EntityManager entityManager = this.hyperJpa.getEntityManager();
         String jpql = "SELECT v FROM VolEntity v";
         TypedQuery<VolEntity> query = entityManager.createQuery(jpql, VolEntity.class);
         Collection<VolEntity> volEntities = query.getResultList();

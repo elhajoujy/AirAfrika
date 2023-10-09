@@ -18,18 +18,42 @@ public class AdminCrudVol {
     public static void main(String[] args) {
         VolDao volDao = new VolDaoImpl();
 
-//        ajouterVol(volDao);
-
-//        consulterVols(volDao.consulterVols());
-
-        //TODO : supprimer un vol
-
-        //FAIRE UNE RECHERCHE DE VOL PAR ID OU CODE OU DATE OU VILLE DE DEPART OU VILLE D'ARRIVEE
-
-        suprimmerVol("VOL-65450904");
+        //  ajouterVol(volDao);
 
 
 
+      //  consulterVols(volDao.consulterVols());
+
+
+      //  suprimmerVol("VOL-65450904");
+
+        modifierVol(volDao);
+
+
+
+
+
+
+
+    }
+
+    public static void modifierVol(VolDao volDao){
+        HashMap<String,String> conditions = new HashMap<>();
+        conditions.put("code","VOL-48358601");
+        ArrayList<VolEntity> vol = volDao.consulterVols(conditions);
+        if (vol.isEmpty()){
+            Print.log("Aucun vol trouvé");
+            return;
+        }
+
+
+        VolEntity volEntity = vol.get(0);
+        volEntity.setPrix(1000);
+        volEntity.setHeureArrivee("14:00");
+        volEntity.setHeureDepart("09:00");
+        volEntity.setVilleDepart("SAFI");
+        volEntity.setVilleArrivee("CASABLANCA");
+        volDao.modifierVol(volEntity);
 
     }
 

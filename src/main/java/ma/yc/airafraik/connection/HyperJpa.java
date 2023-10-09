@@ -16,9 +16,9 @@ public class HyperJpa {
     private EntityManager entityManager;
 
     private HyperJpa() {
-//        entityManagerFactory = Persistence.createEntityManagerFactory("default");
-        entityManagerFactory = new HibernatePersistenceProvider().
-                createContainerEntityManagerFactory(new CustomPresistenceUnitInfo(), new HashMap<>());
+        entityManagerFactory = Persistence.createEntityManagerFactory("default");
+//        entityManagerFactory = new HibernatePersistenceProvider().
+//                createContainerEntityManagerFactory(new CustomPresistenceUnitInfo(), new HashMap<>());
         entityManager = entityManagerFactory.createEntityManager();
     }
 

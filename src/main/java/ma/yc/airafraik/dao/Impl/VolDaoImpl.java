@@ -135,6 +135,24 @@ public class VolDaoImpl implements VolDao {
 
     @Override
     public boolean modifierVol(VolEntity vol) {
+        try{
+            this.transaction.begin();
+
+
+            this.entityManager.merge(vol);
+
+            this.transaction.commit();
+            Print.log("Vol modifié avec succès");
+            return true;
+
+        }catch (Exception e){
+            if (transaction != null && transaction.isActive()) {
+                transaction.rollback(); // Rollback the transaction in case of an exception
+            }
+        }finally {
+            this.entityManager.close();
+        }
+
         return false;
     }
 

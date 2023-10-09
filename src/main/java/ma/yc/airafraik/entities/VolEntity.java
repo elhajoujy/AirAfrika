@@ -1,4 +1,4 @@
-package ma.yc.airafraik.entites;
+package ma.yc.airafraik.entities;
 
 import jakarta.persistence.*;
 import lombok.*;

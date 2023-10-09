@@ -5,8 +5,8 @@ import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import ma.yc.airafraik.entites.SocieteAerienneEntity;
-import ma.yc.airafraik.entites.VolEntity;
+import ma.yc.airafraik.entities.SocieteAerienneEntity;
+import ma.yc.airafraik.entities.VolEntity;
 import org.mindrot.jbcrypt.BCrypt;
 
 

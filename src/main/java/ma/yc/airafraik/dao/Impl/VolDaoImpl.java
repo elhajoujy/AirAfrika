@@ -4,11 +4,10 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityTransaction;
 import jakarta.persistence.Query;
 import jakarta.persistence.TypedQuery;
-import jakarta.transaction.Transactional;
 import ma.yc.airafraik.connection.HyperJpa;
 import ma.yc.airafraik.core.Print;
 import ma.yc.airafraik.dao.VolDao;
-import ma.yc.airafraik.entites.VolEntity;
+import ma.yc.airafraik.entities.VolEntity;
 
 import java.util.ArrayList;
 import java.util.Collection;

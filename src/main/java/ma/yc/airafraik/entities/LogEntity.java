@@ -1,4 +1,4 @@
-package ma.yc.airafraik.entites;
+package ma.yc.airafraik.entities;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -10,7 +10,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.extern.java.Log;
 
-import java.sql.Date;
 import java.sql.Timestamp;
 
 @AllArgsConstructor

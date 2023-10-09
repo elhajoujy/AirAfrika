@@ -8,7 +8,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import ma.yc.airafraik.dao.Impl.VolDaoImpl;
 import ma.yc.airafraik.dao.VolDao;
 import ma.yc.airafraik.dto.ResponseDto;
-import ma.yc.airafraik.entites.VolEntity;
+import ma.yc.airafraik.entities.VolEntity;
 
 import java.io.IOException;
 import java.util.Collection;

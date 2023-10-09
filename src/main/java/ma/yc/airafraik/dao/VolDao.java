@@ -1,6 +1,6 @@
 package ma.yc.airafraik.dao;
 
-import ma.yc.airafraik.entites.VolEntity;
+import ma.yc.airafraik.entities.VolEntity;
 
 import java.util.ArrayList;
 import java.util.Collection;

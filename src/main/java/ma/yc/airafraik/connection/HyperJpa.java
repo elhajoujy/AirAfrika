@@ -4,6 +4,10 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.EntityTransaction;
 import jakarta.persistence.Persistence;
+import ma.yc.airafraik.presistence.CustomPresistenceUnitInfo;
+import org.hibernate.jpa.HibernatePersistenceProvider;
+
+import java.util.HashMap;
 
 public class HyperJpa {
 
@@ -13,6 +17,8 @@ public class HyperJpa {
 
     private HyperJpa() {
         entityManagerFactory = Persistence.createEntityManagerFactory("default");
+//        entityManagerFactory = new HibernatePersistenceProvider().
+//                createContainerEntityManagerFactory(new CustomPresistenceUnitInfo(), new HashMap<>());
         entityManager = entityManagerFactory.createEntityManager();
     }
 

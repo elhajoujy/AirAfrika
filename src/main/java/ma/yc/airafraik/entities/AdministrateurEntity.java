@@ -1,6 +1,9 @@
-package ma.yc.airafraik.entites;
+package ma.yc.airafraik.entities;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.Pattern;
 import lombok.AllArgsConstructor;
@@ -9,31 +12,24 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.extern.java.Log;
 
-import java.util.ArrayList;
-import java.util.Collection;
-
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
 @Builder
 @Log
-@Entity(name = "client")
-public class ClientEntity {
+@Entity(name = "administrateur")
+public class AdministrateurEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id ;
+    private String id ;
+
     private String code ;
-    private String prenom ;
     private String nom ;
-    private String adresse;
+    private String prenom ;
+    private String adresse ;
     @Email
     private String email ;
     @Pattern(regexp="(^$|[0-9]{10})")
-    private String telephone;
+    private String telephone ;
     private String password ;
-    private String profile_image;
-
-    @OneToMany(mappedBy = "client",cascade = CascadeType.ALL,fetch = FetchType.EAGER)
-    private Collection<ReservationEntity> reservationEntities = new ArrayList<>();
-
 }

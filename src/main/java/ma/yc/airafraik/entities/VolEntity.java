@@ -1,4 +1,4 @@
-package ma.yc.airafraik.entites;
+package ma.yc.airafraik.entities;
 
 import jakarta.persistence.*;
 import lombok.*;
@@ -12,7 +12,6 @@ import java.util.Collection;
 @Setter
 @Getter
 @Builder
-@Log
 @Entity
 @Table(name = "VOL")
 public class VolEntity {
@@ -45,6 +44,10 @@ public class VolEntity {
 
     @OneToMany(mappedBy ="vol", cascade = CascadeType.ALL , fetch = FetchType.LAZY)
     private Collection<VolExtrasEntity> volExtrasEntities = new ArrayList<>();
+
+//    @OneToMany(mappedBy ="vol", cascade = CascadeType.ALL , fetch = FetchType.LAZY)
+//    private Collection<VolEscaleEntity> volEscaleEntities = new ArrayList<>();
+
 
     @ManyToMany
     @JoinTable(

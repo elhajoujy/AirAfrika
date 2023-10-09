@@ -4,11 +4,10 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityTransaction;
 import jakarta.persistence.Query;
 import jakarta.persistence.TypedQuery;
-import jakarta.transaction.Transactional;
 import ma.yc.airafraik.connection.HyperJpa;
 import ma.yc.airafraik.core.Print;
 import ma.yc.airafraik.dao.VolDao;
-import ma.yc.airafraik.entites.VolEntity;
+import ma.yc.airafraik.entities.VolEntity;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -207,7 +206,7 @@ public class VolDaoImpl implements VolDao {
 //        EntityManager entityManager = this.hyperJpa.getEntityManager();
         String jpql = "SELECT v FROM VolEntity v WHERE ";
         for (String key : conditions.keySet()) {
-            jpql += "v." + key + " = '" + conditions.get(key) + "' AND ";
+            jpql += "v." + key + " = '" + conditions.get(key) + "' OR ";
         }
         //remove the last AND
         jpql = jpql.substring(0, jpql.length() - 4);

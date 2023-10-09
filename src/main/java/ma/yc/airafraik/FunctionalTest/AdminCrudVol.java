@@ -4,9 +4,8 @@ import ma.yc.airafraik.core.Print;
 import ma.yc.airafraik.core.Util;
 import ma.yc.airafraik.dao.Impl.VolDaoImpl;
 import ma.yc.airafraik.dao.VolDao;
-import ma.yc.airafraik.entites.SocieteAerienneEntity;
-import ma.yc.airafraik.entites.VolEntity;
-import pl.mjaron.etudes.Table;
+import ma.yc.airafraik.entities.SocieteAerienneEntity;
+import ma.yc.airafraik.entities.VolEntity;
 
 import java.util.ArrayList;
 import java.util.Collection;

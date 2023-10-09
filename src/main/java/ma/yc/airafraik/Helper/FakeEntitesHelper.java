@@ -1,10 +1,11 @@
 package ma.yc.airafraik.Helper;
 
 import ma.yc.airafraik.core.Util;
-import ma.yc.airafraik.entites.*;
+import ma.yc.airafraik.entities.*;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Date;
 
 public class FakeEntitesHelper {
 
@@ -62,8 +63,8 @@ public class FakeEntitesHelper {
     public static LogEntity getLogEntity(){
         LogEntity logEntity = new LogEntity();
         logEntity.setDate(new java.sql.Timestamp(new java.util.Date().getTime()));
-        logEntity.setKey("key-name");
-        logEntity.setMessage("message log today is the best dday of my life");
+        logEntity.setKey("key-name-"+Util.generatedLong().toString());
+        logEntity.setMessage(" message log today is the best dday of my life");
         logEntity.setLevel("level Name");
         // LogEntity logEntity1 = entityManager.find(LogEntity.class, 1);
 //        System.out.println(logEntity.getMessage());

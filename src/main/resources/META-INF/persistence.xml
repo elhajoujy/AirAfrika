@@ -9,20 +9,8 @@
             Persistence unit for the JPA tutorial of the Hibernate Getting Started Guide
         </description>
         <provider >org.hibernate.jpa.HibernatePersistenceProvider</provider>
+        <exclude-unlisted-classes>false</exclude-unlisted-classes>
 
-
-
-        <class>ma.yc.airafraik.entites.LogEntity</class>
-        <class>ma.yc.airafraik.entites.ClientEntity</class>
-        <class>ma.yc.airafraik.entites.VolEntity</class>
-        <class>ma.yc.airafraik.entites.ReservationEntity</class>
-        <class>ma.yc.airafraik.entites.VilleImageEntity</class>
-        <class>ma.yc.airafraik.entites.VilleEntity</class>
-        <class>ma.yc.airafraik.entites.AeroportEntity</class>
-        <class>ma.yc.airafraik.entites.VolExtrasEntity</class>
-        <class>ma.yc.airafraik.entites.AdministrateurEntity</class>
-        <class>ma.yc.airafraik.entites.PaymentEntity</class>
-        <class>ma.yc.airafraik.entites.SocieteAerienneEntity</class>
 
 
 
@@ -38,6 +26,7 @@
             <property name="hibernate.connection.password" value="password"/>
             <property name="hibernate.dialect" value="org.hibernate.dialect.PostgreSQLDialect"/>
             <property name="hibernate.show_sql" value="true"/>
+
 
         </properties>
 

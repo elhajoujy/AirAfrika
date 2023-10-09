@@ -55,7 +55,7 @@ public class ReservationEntity {
     @Column(name = "ville_arrivee")
     private String villeArrivee ;
 
-    private boolean confirmed ;
+    private String status ;
 
     private boolean cancelled;
 

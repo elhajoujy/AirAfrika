@@ -3,6 +3,7 @@ package ma.yc.airafraik.entities;
 import jakarta.persistence.*;
 import lombok.*;
 import lombok.extern.java.Log;
+import ma.yc.airafraik.enums.ReservationStatus;
 
 import java.sql.Timestamp;
 import java.util.ArrayList;
@@ -55,8 +56,11 @@ public class ReservationEntity {
     @Column(name = "ville_arrivee")
     private String villeArrivee ;
 
-    private String status ;
+    @Enumerated(EnumType.STRING)
+    @Column(name = "status")
+    private ReservationStatus status ;
 
+    @Column(name = "cancelled")
     private boolean cancelled;
 
 

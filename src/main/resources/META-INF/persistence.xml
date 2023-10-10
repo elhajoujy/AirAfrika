@@ -10,6 +10,7 @@
         </description>
         <provider >org.hibernate.jpa.HibernatePersistenceProvider</provider>
         <exclude-unlisted-classes>false</exclude-unlisted-classes>
+<!--        <class>ma.yc.airafraik.entities.ClientEntity</class>-->
 
 
 

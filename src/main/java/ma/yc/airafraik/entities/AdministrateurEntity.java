@@ -1,9 +1,6 @@
 package ma.yc.airafraik.entities;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.Pattern;
 import lombok.AllArgsConstructor;
@@ -11,6 +8,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.extern.java.Log;
+import org.hibernate.annotations.Type;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -21,7 +19,7 @@ import lombok.extern.java.Log;
 public class AdministrateurEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private String id ;
+    private int id ;
 
     private String code ;
     private String nom ;

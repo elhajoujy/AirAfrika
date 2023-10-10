@@ -1,4 +1,4 @@
-package ma.yc.airafraik.FunctionalTest;
+package ma.yc.airafraik.FunctionalTest.Admin;
 
 import ma.yc.airafraik.core.Print;
 import ma.yc.airafraik.core.Util;
@@ -21,7 +21,7 @@ public class AdminCrudVol {
 
 
 
-      //  consulterVols(volDao.consulterVols());
+//        consulterVols(volDao.consulterVols());
 
 
       //  suprimmerVol("VOL-65450904");

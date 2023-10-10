@@ -6,7 +6,10 @@ import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.EntityTransaction;
 import jakarta.persistence.Persistence;
 import ma.yc.airafraik.Helper.FakeEntitesHelper;
+import ma.yc.airafraik.entities.AdministrateurEntity;
 import ma.yc.airafraik.entities.LogEntity;
+import ma.yc.airafraik.entities.VilleEntity;
+import ma.yc.airafraik.entities.VilleImageEntity;
 
 public class Main {
     public static void main(String[] args) {
@@ -22,14 +25,17 @@ public class Main {
 //            ClientEntity clientEntity = FakeEntitesHelper.getClientEntity();
 //
 //            AdministrateurEntity administrateurEntity = FakeEntitesHelper.getAdministrateurEntity();
+//            entityManager.persist(administrateurEntity);
 //
-//            VilleEntity ville = FakeEntitesHelper.getVilleEntity();
 //
-            entityManager.persist(logEntity);
+            VilleEntity ville = FakeEntitesHelper.getVilleEntity();
+            entityManager.persist(ville);
 //
-//            for (VilleImageEntity imageEntity : ville.getImageEntities()) {
-//                entityManager.persist(imageEntity);
-//            }
+//            entityManager.persist(logEntity);
+
+            for (VilleImageEntity imageEntity : ville.getImageEntities()) {
+                entityManager.persist(imageEntity);
+            }
 
             //TODO : ENGS : SOCIETE
 

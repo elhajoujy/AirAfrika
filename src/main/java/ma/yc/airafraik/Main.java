@@ -29,7 +29,16 @@ public class Main {
 //
 //
             VilleEntity ville = FakeEntitesHelper.getVilleEntity();
-            entityManager.persist(ville);
+//            entityManager.persist(ville);
+//            entityManager.find();
+//            entityManager.remove(ville);
+//            entityManager.merge(ville);
+//            entityManager.refresh(ville);
+//            entityManager.detach(ville);
+//            entityManager.clear();
+//            entityManager.contains(ville);
+//            entityManager.getReference(VilleEntity.class, 1);
+
 //
 //            entityManager.persist(logEntity);
 

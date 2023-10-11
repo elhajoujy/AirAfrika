@@ -22,6 +22,11 @@ SELECT * FROM VOL as f WHERE f.ville_depart = 'SAFI' or ville_arrivee =
 (SELECT ville_arrivee FROM VOL as s WHERE  s.ville_arrivee = 'RABAT' AND s.heure_depart < f.heure_arrivee );
 
 
+SELECT * FROM reservation where date_reservation between '2020-01-01' and '2023-12-31' and status = 'CONFIRMED' ;
+UPDATE reservation SET status  = 'CANCELLED' WHERE status = 'Cancelled';
+SELECT * FROM reservation ;
+
+SELECT count(*) from reservation;
 
 -- LET'S START FROM THE BOTTOM FIRST  I WILL NEED TO SPECIFY WHERE I WANT TO GO FROM WHICH IS SAFI AND THIS EXAMPLE
 -- NEXT I NEED TO SPECIFY WHERE I WANT TO GO TO WHICH IS RABAT

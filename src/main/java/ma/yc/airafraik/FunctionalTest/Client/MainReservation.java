@@ -20,7 +20,7 @@ public class MainReservation {
 
             clientEntities.forEach(client -> {
                client.getReservationEntities().forEach(reservationEntity -> {
-                   Print.log("Cleint avec Reservation =>" + reservationEntity.getCode());
+                   Print.log("client avec Reservation =>" + reservationEntity.getCode());
                    Print.log("Vol =>" + reservationEntity.getVolEntities().toString());
                });
             });

@@ -14,7 +14,8 @@ public class Admin {
             HyperJpa.getInstance().beginTransaction();
 
             AdministrateurEntity admin = em.find(AdministrateurEntity.class, 1);
-
+            //YOU CAN DO ANYTHING YOU WANT HERE
+            admin.setNom("jhskjhdsh");
             Print.log("admin => " + admin.toString());
 
 

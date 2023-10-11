@@ -15,7 +15,8 @@ import org.hibernate.annotations.Type;
 @Data
 @Builder
 @Log
-@Entity(name = "administrateur")
+@Entity()
+@Table(name = "administrateur")
 public class AdministrateurEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

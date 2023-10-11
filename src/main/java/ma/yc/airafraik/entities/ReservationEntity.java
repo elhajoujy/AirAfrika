@@ -21,7 +21,7 @@ public class ReservationEntity {
     @Id
     private int Id ;
     private String code ;
-    @Column(name = "prix_total")
+    @Column(name = "price_total")
     private double prixTotal ;
     @Column(name = "date_reservation")
     private Timestamp date_Reservation;

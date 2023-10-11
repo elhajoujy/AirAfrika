@@ -1,5 +1,8 @@
 package ma.yc.airafraik.FunctionalTest.Admin;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.EntityManager;
+import ma.yc.airafraik.connection.HyperJpa;
 import ma.yc.airafraik.core.Print;
 import ma.yc.airafraik.core.Util;
 import ma.yc.airafraik.dao.Impl.VolDaoImpl;
@@ -26,10 +29,82 @@ public class AdminCrudVol {
 
       //  suprimmerVol("VOL-65450904");
 
-        modifierVol(volDao);
+//        modifierVol(volDao);
 
 
 
+//        ajouterDesAscale(volDao);
+
+            AfficheLesEsclaeDeCestVol();
+
+
+
+
+
+
+
+
+    }
+
+    public static void AfficheLesEsclaeDeCestVol(){
+
+        EntityManager em = HyperJpa.getInstance().getEntityManager();
+
+        try{
+
+            em.getTransaction().begin();
+
+            VolEntity vol = em.find(VolEntity.class,8);
+
+            StringBuilder stringBuilder = new StringBuilder();
+            stringBuilder.append(vol.getVilleDepart());
+
+            boolean isEnd = false;
+            VolEntity volEntity = vol;
+            do {
+                if (volEntity.getVol() == null){
+                    isEnd = true;
+                }
+
+                stringBuilder.append("===>").append(volEntity.getVilleArrivee());
+                volEntity = volEntity.getVol();
+            }while (!isEnd);
+
+            Print.log(stringBuilder.toString());
+
+        }catch (Exception e) {
+            e.printStackTrace();
+            Print.log(e.getMessage());
+            em.getTransaction().rollback();
+        }finally {
+            em.close();
+        }
+
+
+
+
+
+
+    }
+
+    public static  void  ajouterDesAscale(VolDao volDao){
+        EntityManager em = HyperJpa.getInstance().getEntityManager();
+
+        try{
+            em.getTransaction().begin();
+            VolEntity vol = em.find(VolEntity.class,8);
+            VolEntity volScale = em.find(VolEntity.class,9);
+
+            vol.setVol(volScale);
+
+            em.getTransaction().commit();
+        }catch (Exception e) {
+            e.printStackTrace();
+            Print.log(e.getMessage());
+            em.getTransaction().rollback();
+        }finally {
+            em.close();
+        }
 
 
 

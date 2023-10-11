@@ -41,7 +41,7 @@ public class VolEntity {
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "societe_aerienne_id")
-    private SocieteAerienneEntity societeAerienneEntity = null ;
+    private SocieteAerienneEntity societeAerienneEntity ;
 
     @OneToMany(mappedBy ="vol", cascade = CascadeType.ALL , fetch = FetchType.LAZY)
     private Collection<VolExtrasEntity> volExtrasEntities = new ArrayList<>();
@@ -51,10 +51,11 @@ public class VolEntity {
 
 
     @ManyToMany
+    @ToString.Exclude
     @JoinTable(
             name = "reservation_vol",
             joinColumns = { @JoinColumn(name = "vol_id") },
-            inverseJoinColumns = { @JoinColumn(name = "reservation_code") }
+            inverseJoinColumns = { @JoinColumn(name = "reservation_id") }
     )
     private Collection<ReservationEntity> reservationEntities = new ArrayList<>();
 
@@ -73,7 +74,7 @@ public class VolEntity {
                 ", nomberDePlaces=" + nomberDePlaces +
                 ", prix=" + prix +
                 ", societeAerienneEntity=" + societeAerienneEntity.toString() +
-//                ", volExtrasEntities=" + volExtrasEntities +
+                ", volExtrasEntities=" + volExtrasEntities +
 //                ", reservationEntities=" + reservationEntities +
                 '}';
     }

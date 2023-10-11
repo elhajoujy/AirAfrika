@@ -1,6 +1,7 @@
 package ma.yc.airafraik.core;
 
 import java.util.Date;
+import java.util.Random;
 import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -12,7 +13,8 @@ import org.mindrot.jbcrypt.BCrypt;
 
 public class Util {
     private static final String CHARACTERS = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-
+    private static final String LETTERS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+    private static final Random random = new Random();
     public static Long generatedLong() {
         long leftLimit = 1L;
         long rightLimit = 100000000L;
@@ -74,6 +76,23 @@ public class Util {
             return defaultValue;
         }
         return input;
+    }
+
+    public static String generateRandomCode() {
+        // Generate 3 random uppercase letters
+        StringBuilder letters = new StringBuilder();
+        for (int i = 0; i < 3; i++) {
+            char letter = LETTERS.charAt(random.nextInt(LETTERS.length()));
+            letters.append(letter);
+        }
+
+        // Generate a random 3-digit number
+        int number = 100 + random.nextInt(900);
+
+        // Combine the letters and number to create the code
+        String code = letters.toString() + number;
+
+        return code;
     }
 
     public static  long readLong(String key , Scanner scanner){

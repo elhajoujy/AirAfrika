@@ -67,7 +67,7 @@ public class ReservationEntity {
     @ManyToMany
     @JoinTable(
             name = "reservation_vol",
-            joinColumns = { @JoinColumn(name = "reservation_code") },
+            joinColumns = { @JoinColumn(name = "reservation_id") },
             inverseJoinColumns = { @JoinColumn(name = "vol_id") }
     )
     private Collection<VolEntity> volEntities = new ArrayList<>();

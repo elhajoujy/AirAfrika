@@ -1,11 +1,14 @@
 package ma.yc.airafraik.Helper;
 
+import ma.yc.airafraik.core.Print;
 import ma.yc.airafraik.core.Util;
+import ma.yc.airafraik.dao.Impl.VolDaoImpl;
+import ma.yc.airafraik.dao.VolDao;
 import ma.yc.airafraik.entities.*;
+import ma.yc.airafraik.enums.ReservationStatus;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Date;
+import java.time.LocalTime;
+import java.util.*;
 
 public class FakeEntitesHelper {
 
@@ -22,6 +25,66 @@ public class FakeEntitesHelper {
         clientEntity.setCode(longnumber.toString());
 
         return clientEntity;
+    }
+
+    public static ArrayList<VolEntity> VolsPossibleParVilleDepartEtVilleArrivee(String villeDepart , String villeArrivee){
+        HashMap<String , String> conditions = new HashMap<>();
+        VolDao volDao = new VolDaoImpl();
+
+        conditions.put("villeDepart" , villeDepart);
+        conditions.put("villeArrivee" , villeArrivee);
+        ArrayList<VolEntity> vols =  volDao.consulterVols(conditions);
+
+        ArrayList<VolEntity> filteredVols = new ArrayList<>();
+        Print.log(vols.size());
+
+        // Filter vols BY dateDepart NEED TO BE THE SAME AS THE
+        for (VolEntity volDepart : vols) {
+            if (Objects.equals(volDepart.getVilleDepart(), villeDepart)){
+                for (VolEntity volEscale : vols) {
+                    if (Objects.equals(volEscale.getVilleDepart(), volDepart.getVilleArrivee()) ){
+                        LocalTime localTimeVolDepart = LocalTime.parse(volDepart.getHeureArrivee());
+                        LocalTime localTimeVolEscale = LocalTime.parse(volEscale.getHeureDepart());
+
+                        if (localTimeVolDepart.isBefore(localTimeVolEscale)){
+                            filteredVols.add(volEscale);
+                            Print.log("Vol Depart : "  + volDepart.getVilleDepart()+ " => " + volDepart.getHeureDepart() + " Vol Escale : " + volEscale.getHeureDepart()+ " ||  "
+                                    + volEscale.getVilleDepart() + " => " + volEscale.getVilleArrivee() + " :  " + volEscale.getHeureArrivee());
+
+                        }
+
+
+                    }
+                }
+            }
+        }
+        return filteredVols;
+    }
+
+
+
+    public static ReservationEntity getReservationEntity(){
+        ReservationEntity reservationEntity = new ReservationEntity();
+        reservationEntity.setCode(Util.generateRandomCode());
+        reservationEntity.setPrixTotal(1000);
+        reservationEntity.setDate_Reservation(new java.sql.Timestamp(new java.util.Date().getTime()));
+        reservationEntity.setDateDepart("2021-09-01");
+        reservationEntity.setDateArrivee("2021-09-01");
+        reservationEntity.setNumberDeAdulets(2);
+        reservationEntity.setNumberDeEnfants(0);
+        reservationEntity.setNumberDeBebes(0);
+        reservationEntity.setHeureDepart("09:00");
+        reservationEntity.setHeureArrivee("14:00");
+        reservationEntity.setVilleDepart("SAFI");
+        reservationEntity.setVilleArrivee("RABAT");
+        reservationEntity.setStatus(ReservationStatus.EN_ATTENTE);
+        reservationEntity.setCancelled(false);
+        //THIS WILL BE DECIDED NEXT TIME
+        reservationEntity.setClient(null);
+        //TODO : WHEN WE SEARCH FOR POSSIBLE VOLS THIS WILL BE FILLED
+        reservationEntity.setVolEntities(null);
+
+        return reservationEntity;
     }
     public static AdministrateurEntity getAdministrateurEntity(){
         AdministrateurEntity administrateurEntity = new AdministrateurEntity();
@@ -70,5 +133,45 @@ public class FakeEntitesHelper {
 //        System.out.println(logEntity.getMessage());
 //       List<LogEntity> logEntities = entityManager.createQuery("SELECT l FROM LogEntity l", LogEntity.class).getResultList();
         return logEntity;
+    }
+
+    public static Collection<VolExtrasEntity> getVolExtrasEntities() {
+
+        Collection<VolExtrasEntity> volExtrasEntities = new ArrayList<>();
+        VolExtrasEntity volExtras = new VolExtrasEntity();
+        volExtras.setDescription("Vol Extra 1 Description");
+        volExtras.setPrix(100.22);
+        volExtras.setType("FOOD TYPE");
+        volExtrasEntities.add(volExtras);
+
+        VolExtrasEntity volExtras1 = new VolExtrasEntity();
+        volExtras1.setDescription("Vol Extra 2 Description");
+        volExtras1.setPrix(200.22);
+        volExtras1.setType("ASSURANCE TYPE");
+        volExtrasEntities.add(volExtras1);
+
+
+        return volExtrasEntities;
+    }
+
+    public static VolEntity getVolEntity() {
+
+        VolEntity vol = new VolEntity();
+        vol.setCode("VOL-"+Util.generateRandomCode());
+        vol.setPrix(86.12);
+        vol.setVilleDepart("SAFI");
+        vol.setVilleArrivee("RABAT");
+        vol.setNomberDePlaces(33);
+        vol.setDateDepart("2023-05-12");
+        vol.setHeureDepart("12:00");
+        vol.setDateArrive("2023-05-12");
+        vol.setHeureArrivee("14:00");
+        vol.setVilleDepart("Casablanca");
+        vol.setVilleArrivee("Rabat");
+
+        return vol;
+
+
+
     }
 }

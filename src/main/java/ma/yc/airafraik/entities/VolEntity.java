@@ -34,6 +34,7 @@ public class VolEntity {
     @Column(name = "ville_arrivee")
     private String villeArrivee ;
     @Column(name = "nombre_de_places")
+
     private int nomberDePlaces ;
 
     private double prix ;

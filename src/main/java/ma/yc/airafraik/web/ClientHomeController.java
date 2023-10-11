@@ -15,6 +15,13 @@ import java.io.PrintWriter;
 public class ClientHomeController extends HttpServlet {
 
 
+    public ClientHomeController() {
+    }
+
+    public ClientHomeController(String message, PaiementService paiementService) {
+        this.message = message;
+        this.paiementService = paiementService;
+    }
 
     private String message;
     PaiementService paiementService ;

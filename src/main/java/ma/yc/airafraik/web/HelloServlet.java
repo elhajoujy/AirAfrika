@@ -32,4 +32,9 @@ public class HelloServlet extends HttpServlet {
 
     public void destroy() {
     }
+
+    @Override
+    protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        super.service(req, resp);
+    }
 }

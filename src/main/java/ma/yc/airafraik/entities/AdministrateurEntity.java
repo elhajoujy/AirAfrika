@@ -21,7 +21,6 @@ public class AdministrateurEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id ;
-
     private String code ;
     private String nom ;
     private String prenom ;

@@ -4,7 +4,9 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.EntityTransaction;
 import jakarta.persistence.Persistence;
+import lombok.Getter;
 import ma.yc.airafraik.presistence.CustomPresistenceUnitInfo;
+import org.hibernate.Session;
 import org.hibernate.jpa.HibernatePersistenceProvider;
 
 import java.util.HashMap;
@@ -12,8 +14,9 @@ import java.util.HashMap;
 public class HyperJpa {
 
     private static HyperJpa instance;
-    private EntityManagerFactory entityManagerFactory;
-    private EntityManager entityManager;
+    private final EntityManagerFactory entityManagerFactory;
+    @Getter
+    private final EntityManager entityManager;
 
     private HyperJpa() {
         entityManagerFactory = Persistence.createEntityManagerFactory("default");
@@ -22,15 +25,17 @@ public class HyperJpa {
         entityManager = entityManagerFactory.createEntityManager();
     }
 
+
+
+    public static Session getSession(){
+        return getInstance().entityManager.unwrap(Session.class);
+    }
+
     public static HyperJpa getInstance() {
         if (instance == null) {
             instance = new HyperJpa();
         }
         return instance;
-    }
-
-    public EntityManager getEntityManager() {
-        return entityManager;
     }
 
     public void beginTransaction() {

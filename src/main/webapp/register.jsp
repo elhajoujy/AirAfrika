@@ -1,11 +1,11 @@
-<%--<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>--%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
-    <title>Login</title>
+    <title>Sign up</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="icon" type="image/png" href="static/images/logo.png"/>
@@ -34,39 +34,45 @@
     <div class="container-login100">
         <div class="shadow-lg p-2 p-lg-5 rounded" data-aos="fade-up">
             <div class="wrap-login100 p-t-50 p-b-90">
-                <form action="login?status=typed" method="post" class="login100-form validate-form flex-sb flex-w">
-                    <span class="login100-form-title p-b-51">
-                        Login
+                <form action="register" method="post"
+                      class="login100-form validate-form flex-sb flex-w justify-content-center"
+                      enctype="multipart/form-data">
+                    <span class="login100-form-title m-b-20">
+                        Create account
                     </span>
 
                     ${alert}
 
+                    <div class="m-b-16">
+                        <label class="m-0" for="imgInp">
+                            <figure class="d-flex justify-content-center m-0">
+                                <img id="blah" src="static/images/blank_avatar.png" alt="your image"
+                                     style="border-radius: 50%; height: 8em; width: 8em">
+                            </figure>
+                            <figcaption>Click here to change profile image</figcaption>
+                        </label>
+                        <input name="profile-image" type="file" id="imgInp" style="display: none;">
+                    </div>
+
                     <div class="wrap-input100 validate-input m-b-16" data-validate="Username is required">
                         <input class="input100" type="text" name="username" placeholder="Username">
+                        <span class="focus-input100"></span>
                     </div>
 
                     <div class="wrap-input100 validate-input m-b-16" data-validate="Password is required">
                         <input class="input100" type="password" name="password" placeholder="Password">
+                        <span class="focus-input100"></span>
                     </div>
 
-                    <div class="flex-sb-m w-full p-t-3 p-b-24">
-                        <div class="contact100-form-checkbox">
-                            <input class="input-checkbox100" id="ckb1" type="checkbox" name="remember-me-checkbox">
-                            <label class="label-checkbox100" for="ckb1">
-                                Remember me
-                            </label>
-                        </div>
-
-                        <div>
-                            <a href="#" class="txt1">
-                                Forgot?
-                            </a>
-                        </div>
+                    <div class="wrap-input100 validate-input m-b-16" data-validate="Password is required">
+                        <input class="input100" type="password" name="repeat-password"
+                               placeholder="Repeat your password">
+                        <span class="focus-input100"></span>
                     </div>
 
                     <div class="container-login100-form-btn m-t-17">
                         <button type="submit" class="login100-form-btn">
-                            Login
+                            Sign up
                         </button>
                     </div>
                 </form>
@@ -74,9 +80,9 @@
 
             <div class="text-center">
                 <p class="txt1" style="color: #999999">
-                    Don't have an account?
-                    <a href="register.jsp" class="txt1">
-                        Create here
+                    Already have an account?
+                    <a href="login.jsp" class="txt1">
+                        Login here
                     </a>
                 </p>
             </div>
@@ -103,5 +109,14 @@
 <script src="static/js/jquery.magnific-popup.min.js"></script>
 <script src="static/js/aos.js"></script>
 <script src="static/js/main.js"></script>
+
+<script>
+    imgInp.onchange = evt => {
+        const [file] = imgInp.files
+        if (file) {
+            blah.src = URL.createObjectURL(file)
+        }
+    }
+</script>
 </body>
 </html>

@@ -1,14 +1,17 @@
 package ma.yc.airafraik.web;
 
-import com.ecommerce.dao.AccountDao;
 
-import javax.servlet.ServletException;
-import javax.servlet.annotation.MultipartConfig;
-import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.Part;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.MultipartConfig;
+import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.Part;
+import ma.yc.airafraik.dao.AccountDao;
+import ma.yc.airafraik.service.AccountService;
+import ma.yc.airafraik.service.impl.AccountClientServiceImpl;
+
 import java.io.IOException;
 import java.io.InputStream;
 
@@ -16,7 +19,7 @@ import java.io.InputStream;
 @MultipartConfig
 public class RegisterControl extends HttpServlet {
     // Call DAO class to access with database.
-    AccountDao accountDao = new AccountDao();
+    AccountService accountService = new AccountClientServiceImpl();
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -40,7 +43,7 @@ public class RegisterControl extends HttpServlet {
             request.getRequestDispatcher("register.jsp").forward(request, response);
         }
         // Check username is existed or not from database.
-        else if (accountDao.checkUsernameExists(username)) {
+        else if (accountService.checkUsernameExists(username)) {
             String alert = "<div class=\"alert alert-danger wrap-input100\">\n" +
                     "                        <p style=\"font-family: Ubuntu-Bold; font-size: 18px; margin: 0.25em 0; text-align: center\">\n" +
                     "                            Username already exist!\n" +
@@ -51,7 +54,7 @@ public class RegisterControl extends HttpServlet {
         }
         // Insert username, password to database and create account.
         else {
-            accountDao.createAccount(username, password, inputStream);
+            accountService.createAccount(username, password, inputStream);
             String alert = "<div class=\"alert alert-success wrap-input100\">\n" +
                     "                        <p style=\"font-family: Ubuntu-Bold; font-size: 18px; margin: 0.25em 0; text-align: center\">\n" +
                     "                            Create account successfully!\n" +

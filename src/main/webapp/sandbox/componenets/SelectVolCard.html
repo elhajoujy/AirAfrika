@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>sekect vol card</title>
+    <link rel="stylesheet" href="../assets/styles.css"/>
+    
+</head>
+<body>
+    <div class="container">
+            <div class="search-filter-vols">
+                <h2>Flight Filter</h2>
+                <form>
+                    <label for="departure">Departure:</label>
+                    <select id="departure">
+                        <option value="all">All</option>
+                        <option value="new-york">New York</option>
+                        <option value="los-angeles">Los Angeles</option>
+                        <!-- Add more options here -->
+                    </select>
+        
+                    <label for="arrival">Arrival:</label>
+                    <select id="arrival">
+                        <option value="all">All</option>
+                        <option value="london">London</option>
+                        <option value="paris">Paris</option>
+                        <!-- Add more options here -->
+                    </select>
+        
+                    <label for="price-range">Price Range:</label>
+                    <input type="range" id="price-range" min="0" max="1000" value="500">
+                    <span id="price-value">500</span>
+        
+                    <label for="flight-time">Flight Time:</label>
+                    <input type="time" id="flight-time">
+        
+                    <label for="airlines">Airlines:</label>
+                    <select id="airlines">
+                        <option value="all">All Airlines</option>
+                        <option value="delta">Delta Airlines</option>
+                        <option value="united">United Airlines</option>
+                        <!-- Add more options here -->
+                    </select>
+        
+                    <label for="duration">Duration (hours):</label>
+                    <input type="number" id="duration" min="0">
+        
+                    <button type="submit">Apply Filters</button>
+                </form>
+            </div>
+        
+            <!-- Your main content goes here -->
+        
+        <div class="vol-card">
+            <div class="vols-info">
+                <div class="vol-info">
+                    <div class="logo-vol-comapny">
+                        <img  src="https://beebom.com/wp-content/uploads/2018/12/IranAir.jpg" alt="logo">
+                    </div>
+                    <div class="vol-info-heure-depart">
+                        <p>12:00</p>
+                        <p>
+                            Safi (SFI)
+                        </p>
+                    </div>
+                    <div class="rounded-divider"></div>
+                    <div class="vol-info-heure-arrive">
+                        <p>14:00</p>
+                        <p>
+                            Casablanca (CMN)
+                        </p>
+                    </div>
+                    <div class="vol-duration">
+                        <p>2h</p>
+                    </div>
+                </div>
+                <div class="vol-info">
+                    <div class="logo-vol-comapny">
+                        <img  src="https://beebom.com/wp-content/uploads/2018/12/IranAir.jpg" alt="logo">
+                    </div>
+                    <div class="vol-info-heure-depart">
+                        <p>12:00</p>
+                        <p>
+                            Casablanca (CMN)
+                        </p>
+                    </div>
+                    <div class="rounded-divider"></div>
+                    <div class="vol-info-heure-arrive">
+                        <p>14:00</p>
+                        <p>
+                            Rabat (RBA)
+                        </p>
+                    </div>
+                    <div class="vol-duration">
+                        <p>2h</p>
+                    </div>
+                </div>
+            </div>
+            <div class="vol-reservation">
+                <h3> 435 - MAD </h3>
+                <a href="#">Rservez</a>
+                <p>
+                    Lorem ipsum dolor, sit amet consectetur . 
+                </p>
+                <p>
+                    Message details
+                </p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

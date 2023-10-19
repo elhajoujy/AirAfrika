@@ -751,3 +751,69 @@ a {
   width: 120px;
   border-radius: 50%;
   margin-bottom: 20px; }
+
+.form-group {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+label {
+  width: 100px;
+  text-align: right;
+  margin-right: 5px;
+  margin-left: 5px;
+}
+
+.sublabel{
+  color: rgb(128, 128, 128);
+  margin:4px;
+  font-size: 11px;
+}
+
+input[type="text"],
+input[type="date"] {
+  padding: 10px;
+  font-size: 14px;
+}
+
+button[type="submit"] {
+  padding: 10px 20px;
+  background-color: #0050A0;
+  border: none;
+  cursor: pointer;
+}
+
+input[type="date"] {
+  position: relative;
+}
+
+input[type="date"]:before {
+  content: attr(placeholder);
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: #fff;
+  color: rgba(0, 0, 0, 0.65);
+  pointer-events: none;
+  line-height: 1.5;
+  padding: 10px 0.5rem 0 0.5rem;
+}
+
+input[type="date"]:focus:before,
+input[type="date"]:not([value=""]):before
+{
+  display: none;
+}
+
+.custom-bg {
+  background-color: #F7F7F9;
+}
+
+
+.search-bar-container{
+  background-color: #1b1e21;
+}

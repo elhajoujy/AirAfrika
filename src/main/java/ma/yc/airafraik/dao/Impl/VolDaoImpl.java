@@ -197,8 +197,9 @@ public class VolDaoImpl implements VolDao {
     }
 
     @Override
-    public VolEntity consulterVol() {
-        return null;
+    public VolEntity consulterVol(String id) {
+        Integer volId = Integer.parseInt(id);
+        return this.entityManager.find(VolEntity.class, volId);
     }
 
     @Override
@@ -206,7 +207,7 @@ public class VolDaoImpl implements VolDao {
 //        EntityManager entityManager = this.hyperJpa.getEntityManager();
         String jpql = "SELECT v FROM VolEntity v WHERE ";
         for (String key : conditions.keySet()) {
-            jpql += "v." + key + " = '" + conditions.get(key) + "' OR ";
+            jpql += "v." + key + " = '" + conditions.get(key) + "' AND ";
         }
         //remove the last AND
         jpql = jpql.substring(0, jpql.length() - 4);

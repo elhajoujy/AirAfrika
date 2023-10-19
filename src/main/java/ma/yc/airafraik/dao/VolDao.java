@@ -22,7 +22,7 @@ public interface VolDao {
     public boolean supprimerVols();
     public boolean supprimerVols(VolEntity[] vols);
 
-    public VolEntity consulterVol();
+    public VolEntity consulterVol(String id);
     public ArrayList<VolEntity> consulterVols(HashMap<String, String> conditions);
     public Collection<VolEntity> consulterVols();
 }

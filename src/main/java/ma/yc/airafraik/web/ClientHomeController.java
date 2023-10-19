@@ -40,9 +40,6 @@ public class ClientHomeController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setContentType("text/html");
-        double solde = this.paiementService.verifierSolde();
-        solde = 100;
-        req.setAttribute("solde", solde);
-        req.getRequestDispatcher("home.jsp").forward(req, resp);
+        req.getRequestDispatcher("index.jsp").forward(req, resp);
     }
 }

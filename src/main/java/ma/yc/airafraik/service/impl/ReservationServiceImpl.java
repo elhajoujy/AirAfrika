@@ -7,6 +7,9 @@ public class ReservationServiceImpl implements ReservationService {
 
     private PaiementService paiementService ;
 
+    public ReservationServiceImpl() {
+    }
+
     public ReservationServiceImpl(PaiementService paiementService) {
         this.paiementService = paiementService;
     }

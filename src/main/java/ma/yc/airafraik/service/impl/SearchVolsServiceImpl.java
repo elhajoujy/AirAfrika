@@ -2,6 +2,7 @@ package ma.yc.airafraik.service.impl;
 
 import ma.yc.airafraik.dao.Impl.VolDaoImpl;
 import ma.yc.airafraik.dao.VolDao;
+import ma.yc.airafraik.entities.ReservationEntity;
 import ma.yc.airafraik.entities.VolEntity;
 
 import java.util.ArrayList;
@@ -27,5 +28,16 @@ public class SearchVolsServiceImpl implements ma.yc.airafraik.service.SearchVols
 //        conditions.put("nombrePassagers",nombrePassagers);
 
         return this.volDao.consulterVols(conditions);
+    }
+
+    @Override
+    public VolEntity searchVolParId(String id) {
+        if (id == null) return null;
+       VolEntity vol =  this.volDao.consulterVol(id);
+
+
+       return  vol;
+
+
     }
 }

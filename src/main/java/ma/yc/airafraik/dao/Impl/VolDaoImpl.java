@@ -197,8 +197,9 @@ public class VolDaoImpl implements VolDao {
     }
 
     @Override
-    public VolEntity consulterVol() {
-        return null;
+    public VolEntity consulterVol(String id) {
+        Integer volId = Integer.parseInt(id);
+        return this.entityManager.find(VolEntity.class, volId);
     }
 
     @Override

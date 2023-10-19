@@ -65,7 +65,11 @@
             </div>
             <div class="vol-reservation">
                 <h3><c:out value="${vol.prix}" /> - MAD</h3>
-                <a href="/reservation/${vol.id}">Réservez</a>
+                <form action="reservation-details" method="get">
+                    <input type="hidden" name="id" value="${vol.id}">
+                    <input type="submit" value="Réservez">
+                </form>
+                <a href="reservation-details/${vol.id}">Réservez</a>
                 <p>
                     Lorem ipsum dolor, sit amet consectetur.
                 </p>

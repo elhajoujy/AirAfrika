@@ -5,26 +5,56 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import ma.yc.airafraik.dto.Account;
+import ma.yc.airafraik.entities.VolEntity;
 import ma.yc.airafraik.service.AccountService;
+import ma.yc.airafraik.service.SearchVolsService;
 import ma.yc.airafraik.service.impl.AccountAdminServiceImpl;
+import ma.yc.airafraik.service.impl.SearchVolsServiceImpl;
 
 import java.io.IOException;
+import java.util.Collection;
 
 @WebServlet(name = "DashboardController", value = "/admin-dashboard")
 public class DashboardController extends HttpServlet {
 
     private AccountService accountService ;
+    private boolean isAccountValid = true;
+    private String message;
+    private SearchVolsService searchVolsService;
+
 
     @Override
     public void init() throws ServletException {
         this.accountService = new  AccountAdminServiceImpl();
+        this.searchVolsService = new SearchVolsServiceImpl();
     }
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+//        this.verifyAccount(req,resp);
+        req.setAttribute("message",message);
+        Collection<VolEntity> volEntities = this.searchVolsService.consulterVols();
+        req.setAttribute("vols",volEntities);
         req.getRequestDispatcher("views/admin/dashboard.jsp").forward(req,resp);
 
+    }
+
+    private void verifyAccount(HttpServletRequest req, HttpServletResponse resp) {
+//        ma.yc.airafraik.dto.Account account = (ma.yc.airafraik.dto.Account) req.getSession().getAttribute("account");
+//        if(account != null){
+//            if(accountService.isAccountValid(account)){
+//                this.isAccountValid = true;
+//            }
+//        }
+//        if (isAccountValid){
+//            req.setAttribute("account",account);
+//        }else{
+//            try {
+//                resp.sendRedirect("login");
+//            } catch (IOException e) {
+//                e.printStackTrace();
+//            }
+//        }
     }
 
     @Override

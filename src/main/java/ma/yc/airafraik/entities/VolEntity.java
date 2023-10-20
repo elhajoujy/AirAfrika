@@ -37,6 +37,10 @@ public class VolEntity {
 
     private int nomberDePlaces ;
 
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "avion_id")
+    private AvionEntity avion ;
+
 
 
     @ManyToOne(fetch = FetchType.EAGER)

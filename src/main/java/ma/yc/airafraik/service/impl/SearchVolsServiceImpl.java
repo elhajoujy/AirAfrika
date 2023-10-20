@@ -40,4 +40,9 @@ public class SearchVolsServiceImpl implements ma.yc.airafraik.service.SearchVols
 
 
     }
+
+    @Override
+    public Collection<VolEntity> consulterVols() {
+        return this.volDao.consulterVols();
+    }
 }

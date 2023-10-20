@@ -36,13 +36,15 @@ public class RservationDetailsController extends HttpServlet {
 
         String id = req.getParameter("id");
         Print.log("id : " + id);
-//        VolEntity reservationEntity = searchVolsService.searchVolParId(id);
+        VolEntity vol = searchVolsService.searchVolParId(id);
+        req.setAttribute("vol",vol);
+        //TODO : we will use this attribute in the jsp page
 
 //        try{
 //            if (reservationEntity != null){
 //                req.setAttribute("reservation",reservationEntity);
         if (id != null) {
-            req.getRequestDispatcher("reservation-details.jsp").forward(req, resp);
+            req.getRequestDispatcher("reservation-confirmation-page.jsp").forward(req, resp);
         }else{
             resp.sendRedirect("/");
         }

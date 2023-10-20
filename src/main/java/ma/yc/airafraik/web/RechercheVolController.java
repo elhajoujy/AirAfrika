@@ -38,7 +38,7 @@ public class RechercheVolController  extends HttpServlet {
             //TODO : if those information are not null then we will search for the vols
             Collection<VolEntity> vols = searchVolsService.searchVols(origin,depart,departuredate,retourdate,"1");
             req.setAttribute("vols",vols);
-            req.getRequestDispatcher("recherchePage.jsp").forward(req, resp);
+            req.getRequestDispatcher("recherche-page.jsp").forward(req, resp);
         }
 
 

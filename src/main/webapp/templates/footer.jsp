@@ -35,7 +35,7 @@
             <div class="col-md-6 col-lg-3 mb-4 mb-lg-0">
                 <h3 class="footer-heading mb-4">Promo</h3>
                 <a href="#" class="block-6">
-                    <img src="static/images/hero_1.jpg" alt="Image placeholder" class="img-fluid rounded mb-4">
+                    <img src="https://images.ctfassets.net/m9ph4qvas97u/4VYlrTPvr4aa92PEHhyTuJ/5272b54d2f7e686ce08202119384d800/oneworld-alliance-royal-air-maroc-RAM_logo_horizontal.png?fm=webp&q=80" alt="Image placeholder" class="img-fluid rounded mb-4">
                     <h3 class="font-weight-light  mb-0">Finding Your Perfect Shoes</h3>
                     <p>Promo from nuary 15 &mdash; 25, 2019</p>
                 </a>

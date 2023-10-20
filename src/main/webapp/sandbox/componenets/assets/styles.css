@@ -94,7 +94,11 @@ div.rounded-divider {
     text-align: center;
 }
 
-.vol-reservation a{
+
+button{
+    all: unset;
+}
+.vol-reservation a ,button{
     text-decoration: none;
     color: white;
     background-color: rgb(58, 58, 252);
@@ -106,6 +110,7 @@ div.rounded-divider {
     grid-row: span 2;
 
 }
+
 
 .vol-reservation h3{
     grid-row: span 4;
@@ -119,9 +124,51 @@ div.rounded-divider {
     grid-row: span 1;
 }
 
+
 .reservation-details-container{
     display: grid;
     grid-template-columns: 2fr 1fr ; 
+    gap: 2rem;
 }
 
+.your-booking-header{
+    display: flex;
+    justify-content: space-between;
+    justify-items: center;
+    align-items: center;
+    text-align: center;
+}
+.your-booking-header p{
+    margin: 0.4rem;
+    /* padding: 0.1rem; */
+}
+
+.your-booking-total{
+    display: flex;
+    justify-content: space-between;
+    justify-items: center;
+
+}
+
+.your-booking{
+    border: 2px solid #bbb;
+    border-radius: 5px;
+    padding: 1rem;
+
+}
+.booking-details  > .passnger{
+    display: flex;
+    justify-content: space-between;
+}
+
+.confirmation{
+    display: grid;
+    grid-template-columns: 1fr ;
+    gap: 1rem;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    margin: 1rem;
+
+}
 

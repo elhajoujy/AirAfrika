@@ -79,7 +79,7 @@ div.rounded-divider {
     text-align: center;
 }
 
-.vol-reservation a{
+.vol-reservation a input{
     text-decoration: none;
     color: white;
     background-color: rgb(58, 58, 252);
@@ -90,6 +90,18 @@ div.rounded-divider {
     margin: 0.5rem;
     grid-row: span 2;
 
+}
+
+.button-reservation{
+    text-decoration: none;
+    color: white;
+    background-color: rgb(58, 58, 252);
+    padding: 0.5rem;
+    border-radius: 5px;
+    /* min-width: 100px; */
+    text-align: center;
+    margin: 0.5rem;
+    grid-row: span 2;
 }
 
 .vol-reservation h3{

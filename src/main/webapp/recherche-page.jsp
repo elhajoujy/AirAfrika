@@ -29,7 +29,7 @@
         </div>
     </c:if>
     <c:if test="${not empty vols}">
-        <div class="alert alert-success" role="alert">
+        <div class="alert mt-3 alert-success" role="alert">
             ${vols.size()} vol(s) trouvé(s)
         </div>
     </c:if>
@@ -67,9 +67,9 @@
                 <h3><c:out value="${vol.prix}" /> - MAD</h3>
                 <form action="reservation-details" method="get">
                     <input type="hidden" name="id" value="${vol.id}">
-                    <input type="submit" value="Réservez">
+                    <input class="button-reservation"  type="submit" value="Réservez">
                 </form>
-                <a href="reservation-details/${vol.id}">Réservez</a>
+<%--                <a href="reservation-details/${vol.id}">Réservez</a>--%>
                 <p>
                     Lorem ipsum dolor, sit amet consectetur.
                 </p>

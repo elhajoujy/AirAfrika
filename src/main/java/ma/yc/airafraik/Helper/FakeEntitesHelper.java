@@ -162,9 +162,9 @@ public class FakeEntitesHelper {
         vol.setVilleDepart("SAFI");
         vol.setVilleArrivee("RABAT");
         vol.setNomberDePlaces(33);
-        vol.setDateDepart("2023-05-12");
+        vol.setDateDepart(new Date());
         vol.setHeureDepart("12:00");
-        vol.setDateArrive("2023-05-12");
+        vol.setDateArrive(new Date());
         vol.setHeureArrivee("14:00");
         vol.setVilleDepart("Casablanca");
         vol.setVilleArrivee("Rabat");

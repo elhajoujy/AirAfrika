@@ -7,8 +7,10 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import ma.yc.airafraik.entities.VolEntity;
 import ma.yc.airafraik.service.AccountService;
+import ma.yc.airafraik.service.AvionService;
 import ma.yc.airafraik.service.SearchVolsService;
 import ma.yc.airafraik.service.impl.AccountAdminServiceImpl;
+import ma.yc.airafraik.service.impl.AvionServiceImpl;
 import ma.yc.airafraik.service.impl.SearchVolsServiceImpl;
 
 import java.io.IOException;
@@ -21,12 +23,14 @@ public class DashboardController extends HttpServlet {
     private boolean isAccountValid = true;
     private String message;
     private SearchVolsService searchVolsService;
+    private AvionService avionService;
 
 
     @Override
     public void init() throws ServletException {
         this.accountService = new  AccountAdminServiceImpl();
         this.searchVolsService = new SearchVolsServiceImpl();
+        this.avionService = new AvionServiceImpl();
     }
 
     @Override
@@ -35,7 +39,9 @@ public class DashboardController extends HttpServlet {
         req.setAttribute("message",message);
         Collection<VolEntity> volEntities = this.searchVolsService.consulterVols();
         req.setAttribute("vols",volEntities);
+        req.setAttribute("avions",this.avionService.consulterAvions());
         req.getRequestDispatcher("views/admin/dashboard.jsp").forward(req,resp);
+
 
     }
 

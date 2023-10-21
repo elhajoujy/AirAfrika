@@ -1,12 +1,5 @@
-<%@ page import="java.util.Collection" %>
-<%@ page import="ma.yc.airafraik.entities.VolEntity" %>
-<%@ page import="java.util.ArrayList" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
-<%
-    response.setHeader("Cache-Control", "no-cache, no-store, must-revalidate");
-    Collection<VolEntity> vols = (Collection<VolEntity>) request.getAttribute("vols") ;
-%>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -23,20 +16,61 @@
         <h2>
             Show some statistics here
         </h2>
-        <div class="statistics-cards justify-content-between  d-flex ">
-            <div class="reservation-cancelled">
-                cancelled
-                yearly and monthly
+        <div class="d-flex justify-content-center ">
+            <div class="col-xl-3 col-md-6 mb-4">
+                <div class="card border-left-primary shadow h-100 py-2">
+                    <div class="card-body">
+                        <div class="row no-gutters align-items-center">
+                            <div class="col mr-2">
+                                <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                                    cancelled yearly and monthly
+                                </div>
+                                <div class="h5 mb-0 font-weight-bold text-gray-800">
+                                    50 cancelled
+                                </div>
+                            </div>
+                            <div class="col-auto">
+                                <i class="fas fa-calendar fa-2x text-gray-300"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class="reservation-confirm">
-                confirmed
-                yearly and monthly
+            <div class="col-xl-3 col-md-6 mb-4">
+                <div class="card border-left-primary shadow h-100 py-2">
+                    <div class="card-body">
+                        <div class="row no-gutters align-items-center">
+                            <div class="col mr-2">
+                                <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                                    confirmed yearly and monthly
+                                </div>
+                                <div class="h5 mb-0 font-weight-bold text-gray-800">
+                                    50 confirmed
+                                </div>
+                            </div>
+                            <div class="col-auto">
+                                <i class="fas fa-calendar fa-2x text-gray-300"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
+
     </div>
+
+
 
     <div class="site-section">
         <div class="container">
+            <div class="vol-operation-actions my-4">
+                <button class="btn btn-primary " data-toggle="modal" data-target=".bd-example-modal-lg">
+                    Add Vol
+                </button>
+                <button class="btn btn-primary" data-toggle="modal" data-target=".addAvionModal">
+                    Add Avion
+                </button>
+            </div>
             <div class="row mb-5">
                 <div class="col-md-12">
                     <div class="site-blocks-table">
@@ -54,9 +88,7 @@
                             </thead>
                             <tbody>
 <%--                            TODO : LOOP INTO VOLS AND SHOW THEM HERE
-
 --%>
-
                             <c:forEach items="${vols}" var="vol">
                                 <tr>
                                     <th scope="row">${vol.id}</th>
@@ -65,20 +97,146 @@
                                     <td>${vol.avion.nomAvion}</td>
                                     <td>${vol.nomberDePlaces}</td>
                                     <td>
-                                        <button class="btn btn-danger">
-                                            Delete
-                                        </button>
+
+                                        <a href="${pageContext.request.contextPath}/vol-supprimer?id=${vol.id}" class="btn btn-danger">Delete</a>
                                     </td>
                                     <td>
-                                        <button class="btn btn-warning">
-                                            update
-                                        </button>
+                                        <a href="${pageContext.request.contextPath}/vol-update?id=${vol.id}" class="btn btn-warning">update</a>
                                     </td>
                                 </tr>
                             </c:forEach>
 
                             </tbody>
                         </table>
+                    </div>
+                </div>
+            </div>
+
+            <div class="modal fade addAvionModal" tabindex="-1" role="dialog" aria-labelledby="addAvionModal" aria-hidden="true">
+                <div class="modal-dialog modal-lg p-4">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title text-black" id="addAvionModal">
+                                Avion information
+                            </h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="container">
+                            <h2>Formulaire d'Informations d'Avion</h2>
+                            <form method="post" action="admin-avion">
+                                <div class="form-group">
+                                    <label for="nom_avion">Nom de l'Avion</label>
+                                    <input type="text" class="form-control" id="nom_avion" name="nom_avion" value="">
+                                </div>
+                                <div class="form-group">
+                                    <label for="nombre_place">Nombre de Places</label>
+                                    <input type="number" class="form-control" id="nombre_place" name="nombre_place" value="">
+                                </div>
+                                <button type="submit" class="btn btn-primary mb-4">
+                                    Ajouter
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+            <div class="modal fade  bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="addVolModal" aria-hidden="true">
+                <div class="modal-dialog modal-lg p-4">
+                    <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title text-black" id="addVolModal">
+                                    Vol information
+                                </h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+
+                            </div>
+                        <div class="container">
+                            <h2>Formulaire d'Informations de Vol</h2>
+                            <form method="post" action="admin-vol">
+                                <div class="form-group">
+                                    <label for="code">Code</label>
+                                    <input type="text" class="form-control" id="code" name="code" value="${vol.getCode()}">
+                                </div>
+                                <div class="form-group">
+                                    <label for="heure_depart">Heure de Départ</label>
+                                    <input type="time" class="form-control" id="heure_depart" name="heure_depart" value="${vol.getHeureDepart()}">
+                                </div>
+                                <div class="form-group">
+                                    <label for="heure_arrivee">Heure d'Arrivée</label>
+                                    <input type="time" class="form-control" id="heure_arrivee" name="heure_arrivee" value="${vol.getHeureArrivee()}">
+                                </div>
+                                <div class="form-group">
+                                    <label for="date_depart">Date de Départ</label>
+                                    <input type="date" class="form-control" id="date_depart" name="date_depart" value="<c:out value="${vol.dateDepart}"/> ">
+                                </div>
+                                <div class="form-group">
+                                    <label for="date_arrivee">Date d'Arrivée</label>
+                                    <input type="date" class="form-control" id="date_arrivee" name="date_arrivee" value="<c:out value="${vol.dateArrive}"/> ">
+                                </div>
+                                <div class="form-group">
+                                    <label for="ville_depart">Ville de Départ</label>
+                                    <input type="text" class="form-control" id="ville_depart" name="ville_depart" value="${vol.getVilleDepart()}">
+                                </div>
+                                <div class="form-group">
+                                    <label for="ville_arrivee">Ville d'Arrivée</label>
+                                    <input type="text" class="form-control" id="ville_arrivee" name="ville_arrivee" value="${vol.getVilleArrivee()}">
+                                </div>
+                                <div class="form-group">
+                                    <label for="avion">Avion</label>
+                                    <select class="form-control" id="avion" name="avion">
+                                        <option>-</option>
+                                        <c:forEach items="${avions}" var="avion">
+                                            <c:if test="${avion.id == vol.avion.id}">
+                                                <option value="${avion.id}" selected>${avion.nomAvion}</option>
+                                            </c:if>
+                                            <c:if test="${avion.id != vol.avion.id}">
+                                                <option value="${avion.id}">${avion.nomAvion}</option>
+                                            </c:if>
+                                        </c:forEach>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="nombre_de_places">Nombre de Places</label>
+                                    <input type="number" class="form-control" id="nombre_de_places" name="nombre_de_places" value="${vol.getNomberDePlaces()}">
+                                </div>
+                                <div class="form-group">
+                                    <label for="prix">Prix</label>
+                                    <input type="number" class="form-control" id="prix" name="prix" value="${vol.getPrix()}">
+                                </div>
+<%--                                <div class="form-group">--%>
+<%--                                    <label for="aeroport_id">ID de l'Aéroport</label>--%>
+<%--                                    <input type="number" class="form-control" id="aeroport_id" name="aeroport_id">--%>
+<%--                                </div>--%>
+
+<%--                                <div class="form-group">--%>
+<%--                                    <label for="societe_aerienne_id">ID de la Compagnie Aérienne</label>--%>
+<%--                                    <input type="number" class="form-control" id="societe_aerienne_id" name="societe_aerienne_id">--%>
+<%--                                </div>--%>
+<%--                                <div class="form-group">--%>
+<%--                                    <label for="ville_id">ID de la Ville</label>--%>
+<%--                                    <input type="number" class="form-control" id="ville_id" name="ville_id">--%>
+<%--                                </div>--%>
+<%--                                <div class="form-group">--%>
+<%--                                    <label for="vol_id">ID du Vol</label>--%>
+<%--                                    <input type="number" class="form-control" id="vol_id" name="vol_id">--%>
+<%--                                </div>--%>
+<%--                                <div class="form-group">--%>
+<%--                                    <label for="avion_id">ID de l'Avion</label>--%>
+<%--                                    <input type="number" class="form-control" id="avion_id" name="avion_id">--%>
+<%--                                </div>--%>
+                                <button type="submit" class="btn btn-primary mb-4">
+                                    Ajouter
+                                </button>
+                            </form>
+
+
                     </div>
                 </div>
             </div>

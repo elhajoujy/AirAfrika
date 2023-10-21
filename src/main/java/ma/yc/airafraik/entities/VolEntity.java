@@ -6,6 +6,7 @@ import lombok.extern.java.Log;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Date;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -26,9 +27,9 @@ public class VolEntity {
     private String heureArrivee;
 
     @Column(name = "date_depart")
-    private String dateDepart ;
+    private Date dateDepart ;
     @Column(name = "date_arrivee")
-    private String dateArrive ;
+    private Date dateArrive ;
     @Column(name = "ville_depart")
     private String villeDepart ;
     @Column(name = "ville_arrivee")

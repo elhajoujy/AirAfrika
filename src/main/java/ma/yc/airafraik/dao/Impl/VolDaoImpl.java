@@ -61,16 +61,25 @@ public class VolDaoImpl implements VolDao {
         try {
             hyperJpa.beginTransaction();
 
-            this.entityManager.persist(vol.getSocieteAerienneEntity());
+
+//            this.entityManager.persist(vol.getSocieteAerienneEntity());
+
+
+            this.entityManager.persist(vol.getAvion());
 
             this.entityManager.persist(vol);
             this.transaction.commit();
 
-            hyperJpa.commitTransaction();
+            return true;
 
-        } finally {
-            hyperJpa.rollbackTransaction();
-            hyperJpa.close();
+        }catch (Exception e){
+            if (transaction != null && transaction.isActive()) {
+                transaction.rollback(); // Rollback the transaction in case of an exception
+            }
+            else {
+                e.printStackTrace();
+                transaction.rollback();
+            }
         }
 
         return false;

@@ -1,6 +1,8 @@
 package ma.yc.airafraik.service;
 
+import ma.yc.airafraik.entities.ReservationEntity;
+
 public interface ReservationService {
-    public double confirmationReservation(Object object);
-    public double annulationReservation(Object object);
+    public double confirmationReservation(ReservationEntity reservationEntity);
+    public double annulationReservation(ReservationEntity reservationEntity);
 }

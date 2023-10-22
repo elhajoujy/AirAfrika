@@ -31,9 +31,9 @@
             </div>
             <div class="row">
                 <div class="form-group col-lg-3 align-items-start flex-column">
-                    <label for="adults" class="d-inline-flex col-auto">Adults <span class="sublabel"> 12+
+                    <label for="numberDeAdultes" class="d-inline-flex col-auto">Adults <span class="sublabel"> 12+
                             </span></label>
-                    <select class="form-select" id="adults"
+                    <select class="form-select" id="numberDeAdultes" name="numberDeAdultes"
                             onchange="javascript: dynamicDropDown(this.options[this.selectedIndex].value);">
                         <option value="1">1</option>
                         <option value="2">2</option>
@@ -47,9 +47,9 @@
                     </select>
                 </div>
                 <div class="form-group col-lg-3 align-items-start flex-column">
-                    <label for="children" class="d-inline-flex col-auto">Children <span class="sublabel"> 2-11
+                    <label for="numberDeEnfants" class="d-inline-flex col-auto">Children <span class="sublabel"> 2-11
                             </span></label>
-                    <select class="form-select" id="children">
+                    <select class="form-select" id="numberDeEnfants" name="numberDeEnfants">
                         <option value="0">0</option>
                         <option value="1">1</option>
                         <option value="2">2</option>
@@ -62,11 +62,13 @@
                     </select>
                 </div>
                 <div class="form-group col-lg-3 align-items-start flex-column">
-                    <label for="infants" class="d-inline-flex col-auto">Infants <span class="sublabel"> less than
+                    <label for="numberDeBebes" class="d-inline-flex col-auto">Infants <span class="sublabel"> less than
                                 2</span></label>
-                    <select class="form-select" id="infants">
+                    <select class="form-select" id="numberDeBebes" name="numberDeBebes">
                         <option value="0">0</option>
                         <option value="1">1</option>
+                        <option value="1">3</option>
+                        <option value="1">3</option>
                     </select>
                 </div>
             </div>

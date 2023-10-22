@@ -20,45 +20,36 @@
 <jsp:include page="templates/header.jsp"/>
 <div class="container mt-4">
     <h2>Contact Details</h2>
-    <form id="reservation-form" method="post" action="reservation-confirmation">
-        <div class="row">
-            <div class="col-md-6">
-                <div class="form-group">
-                    <label for="name">Full Name</label>
-                    <input type="text" class="form-control" id="name" name="name" placeholder="Enter your full name" required>
-                </div>
+    <div class="container">
+        <form action="reservation-confirmation" method="POST">
+            <div class="form-group">
+                <label for="nom">Nom:</label>
+                <input type="text" class="form-control" id="nom" name="nom" required>
             </div>
-            <div class="col-md-6">
-                <div class="form-group">
-                    <label for="email">Email Address</label>
-                    <input type="email" class="form-control" id="email" name="email" placeholder="Enter your email address" required>
-                </div>
+
+            <div class="form-group">
+                <label for="prenom">Prénom:</label>
+                <input type="text" class="form-control" id="prenom" name="prenom" required>
             </div>
-        </div>
-        <div class="form-group">
-            <label for="phone">Phone Number</label>
-            <input type="tel" class="form-control" id="phone" name="phone" placeholder="Enter your phone number" required>
-        </div>
-        <div class="row">
-            <div class="col-md-6">
-                <div class="form-group">
-                    <label for="flight">Flight Number</label>
-                    <input type="text" class="form-control" id="flight" name="flight" placeholder="Enter your flight number" required>
-                </div>
+
+            <div class="form-group">
+                <label for="adresse">Adresse:</label>
+                <input type="text" class="form-control" id="adresse" name="adresse" required>
             </div>
-            <div class="col-md-6">
-                <div class="form-group">
-                    <label for="date">Flight Date</label>
-                    <input type="date" class="form-control" id="date" name="date" required>
-                </div>
+
+            <div class="form-group">
+                <label for="email">Email:</label>
+                <input type="email" class="form-control" id="email" name="email" required>
             </div>
-        </div>
-        <div class="form-group">
-            <label for="comments">Additional Comments</label>
-            <textarea class="form-control" id="comments" name="comments" rows="4" placeholder="Any additional comments or special requests"></textarea>
-        </div>
-        <button type="submit" class="btn btn-primary">Submit</button>
-    </form>
+
+            <div class="form-group">
+                <label for="telephone">Téléphone:</label>
+                <input type="tel" class="form-control" id="telephone" name="telephone" required>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+    </div>
     <jsp:include page="templates/footer.jsp"/>
 </div>
 </body>

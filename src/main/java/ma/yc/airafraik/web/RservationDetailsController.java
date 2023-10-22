@@ -39,6 +39,7 @@ public class RservationDetailsController extends HttpServlet {
         VolEntity vol = searchVolsService.searchVolParId(id);
         req.setAttribute("vol",vol);
         //TODO : we will use this attribute in the jsp page
+        req.getSession().setAttribute("vol",vol);
 
 //        try{
 //            if (reservationEntity != null){

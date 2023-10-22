@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.*;
 import lombok.extern.java.Log;
 import ma.yc.airafraik.enums.ReservationStatus;
+import ma.yc.airafraik.enums.ReserveType;
 
 import java.sql.Timestamp;
 import java.util.ArrayList;
@@ -19,6 +20,7 @@ import java.util.Collection;
 @ToString
 public class ReservationEntity {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int Id ;
     private String code ;
     @Column(name = "price_total")
@@ -60,6 +62,11 @@ public class ReservationEntity {
     @Column(name = "status")
     private ReservationStatus status ;
 
+    @Enumerated(EnumType.STRING)
+    @Column(name = "flight_type")
+    private ReserveType flightType;
+
+
     @Column(name = "cancelled")
     private boolean cancelled;
 
@@ -71,6 +78,7 @@ public class ReservationEntity {
             inverseJoinColumns = { @JoinColumn(name = "vol_id") }
     )
     private Collection<VolEntity> volEntities = new ArrayList<>();
+
 
 
 

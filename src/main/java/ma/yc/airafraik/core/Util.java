@@ -1,5 +1,6 @@
 package ma.yc.airafraik.core;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Random;
 import java.util.Scanner;
@@ -19,6 +20,17 @@ public class Util {
         long leftLimit = 1L;
         long rightLimit = 100000000L;
         return leftLimit + (long) (Math.random() * (rightLimit - leftLimit));
+    }
+
+    public static String generateFlightTicketCode(String airlineCode, Long flightNumber) {
+        // Get the current timestamp
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMddHHmmss");
+        String timestamp = dateFormat.format(new Date());
+
+        // Generate a unique code using airline code, flight number, and timestamp
+        String ticketCode = airlineCode + flightNumber + timestamp;
+
+        return ticketCode;
     }
 
 

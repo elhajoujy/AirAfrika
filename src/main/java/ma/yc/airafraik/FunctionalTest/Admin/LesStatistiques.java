@@ -28,7 +28,7 @@ public class LesStatistiques {
         conditions.put("date_2", "2023-12-31");
 
         ArrayList<ReservationEntity> reservationEntities =
-                reservationDao.AfficheLesStatistiques(conditions, ReservationStatus.PENDING);
+                reservationDao.AfficheLesStatistiques(conditions, ReservationStatus.EN_ATTENTE);
         Print.log(reservationEntities.size());
 
 

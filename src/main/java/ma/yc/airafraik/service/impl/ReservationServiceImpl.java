@@ -1,26 +1,62 @@
 package ma.yc.airafraik.service.impl;
 
+import ma.yc.airafraik.core.Util;
+import ma.yc.airafraik.dao.Impl.ReservationDaoImpl;
+import ma.yc.airafraik.dao.ReservationDao;
+import ma.yc.airafraik.entities.ReservationEntity;
+import ma.yc.airafraik.enums.ReserveType;
 import ma.yc.airafraik.service.PaiementService;
 import ma.yc.airafraik.service.ReservationService;
 
 public class ReservationServiceImpl implements ReservationService {
 
     private PaiementService paiementService ;
+    private ReservationDao reservationDao;
 
     public ReservationServiceImpl() {
+        this.reservationDao = new ReservationDaoImpl();
     }
 
     public ReservationServiceImpl(PaiementService paiementService) {
         this.paiementService = paiementService;
     }
     @Override
-    public double confirmationReservation(Object object) {
-        //TODO : une réduction de 19% s'applique pour les clients qui réservant aller/retour
-        return this.confirmationReservation("");
+    public double confirmationReservation(ReservationEntity reservationEntity) {
+        if (reservationEntity == null) {
+            // Handle the case where the reservation is null
+            return 0;
+        }
+
+        reservationEntity.setCode(Util.generateFlightTicketCode(Util.generateRandomCode(),
+                Util.generatedLong()
+                )
+        );
+
+
+        reservationEntity.setFlightType(ReserveType.ALLER_RETOUR);
+
+
+        double totalCost = reservationEntity.getPrixTotal();
+
+        if (reservationEntity.getFlightType() == ReserveType.ALLER) {
+            // This reservation is for an "aller" (one-way) flight
+        } else if (reservationEntity.getFlightType() == ReserveType.RETOUR) {
+            // This reservation is for a "retour" (round-trip) flight
+        } else if (reservationEntity.getFlightType() == ReserveType.ALLER_RETOUR) {
+            // This reservation is for an "aller_retour" (round-trip) flight
+            double discount = 0.10 * totalCost;
+            totalCost -= discount;
+            reservationEntity.setPrixTotal(totalCost);
+        } else {
+            // Handle the case where the flight type is none of the specified values
+        }
+
+        this.reservationDao.ajouterReservation(reservationEntity);
+        return totalCost;
     }
 
     @Override
-    public double annulationReservation(Object object) {
+    public double annulationReservation(ReservationEntity reservationEntity) {
         //TODO : annuler sa réservation après la confirmation de son vol dans le cas d'annulation:
         // 8% des frais est retenue pour la société AirAfrika > 24h avant le vol
 

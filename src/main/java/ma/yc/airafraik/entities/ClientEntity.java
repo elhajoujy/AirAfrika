@@ -28,7 +28,7 @@ public class ClientEntity {
     private String adresse;
     @Email
     private String email ;
-    @Pattern(regexp="(^$|[0-9]{10})")
+//    @Pattern(regexp="(^$|[0-9]{10})")
     private String telephone;
     private String password ;
     private String profile_image;

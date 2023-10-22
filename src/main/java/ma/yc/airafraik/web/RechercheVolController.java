@@ -1,6 +1,7 @@
 package ma.yc.airafraik.web;
 
 import jakarta.servlet.ServletConfig;
+import jakarta.servlet.ServletContext;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -17,8 +18,14 @@ import java.util.Collection;
 @WebServlet(name = "RechercheVolController", value = "/recherche")
 public class RechercheVolController  extends HttpServlet {
 
-    private SearchVolsService searchVolsService = new SearchVolsServiceImpl();
+    private SearchVolsService searchVolsService ;
+    private ServletContext context;
 
+    @Override
+    public void init(ServletConfig config) throws ServletException {
+        this.searchVolsService = new SearchVolsServiceImpl();
+        this.context = config.getServletContext();
+    }
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -30,6 +37,19 @@ public class RechercheVolController  extends HttpServlet {
         String retourdate = req.getParameter("return-date");
         //TODO : if those information are null then we will redirect to the home page
 
+        Integer numberDeAdultes = Integer.parseInt(req.getParameter("numberDeAdultes"));
+        Integer numberDeEnfants = Integer.parseInt(req.getParameter("numberDeEnfants"));
+        Integer numberDeBebes = Integer.parseInt(req.getParameter("numberDeBebes"));
+
+        this.context.setAttribute("numberDeAdultes",numberDeAdultes);
+        this.context.setAttribute("numberDeEnfants",numberDeEnfants);
+        this.context.setAttribute("numberDeBebes",numberDeBebes);
+
+
+
+
+
+
 
 
         if (depart == null  || origin == null || departuredate == null ) {
@@ -40,9 +60,6 @@ public class RechercheVolController  extends HttpServlet {
             req.setAttribute("vols",vols);
             req.getRequestDispatcher("recherche-page.jsp").forward(req, resp);
         }
-
-
-
 
 
     }
@@ -62,8 +79,4 @@ public class RechercheVolController  extends HttpServlet {
         super.destroy();
     }
 
-    @Override
-    public void init(ServletConfig config) throws ServletException {
-        super.init(config);
-    }
 }

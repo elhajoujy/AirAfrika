@@ -10,7 +10,7 @@ import java.util.HashMap;
 public interface ReservationDao {
 
 
-    public void ajouterReservation(ReservationEntity reservationEntity);
+    public boolean ajouterReservation(ReservationEntity reservationEntity);
 
     public void modifierReservation(ReservationEntity reservationEntity);
 

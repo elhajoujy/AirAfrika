@@ -18,7 +18,8 @@ public class ReservationDaoImpl  implements ReservationDao{
     EntityManager entityManager = hyperJpa.getEntityManager();
     EntityTransaction transaction = entityManager.getTransaction();
     @Override
-    public void ajouterReservation(ReservationEntity reservationEntity) {
+    public boolean ajouterReservation(ReservationEntity reservationEntity) {
+
         try {
             transaction.begin();
             entityManager.persist(reservationEntity.getClient());
@@ -27,10 +28,11 @@ public class ReservationDaoImpl  implements ReservationDao{
             }
             entityManager.persist(reservationEntity);
             transaction.commit();
+            return true;
         }catch (Exception e){
             transaction.rollback();
         }
-
+        return false;
     }
 
     @Override

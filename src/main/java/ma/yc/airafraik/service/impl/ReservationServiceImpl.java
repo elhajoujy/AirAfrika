@@ -1,5 +1,6 @@
 package ma.yc.airafraik.service.impl;
 
+import ma.yc.airafraik.FunctionalTest.Client.ConfirmationReservationEtEnvoyeEmail;
 import ma.yc.airafraik.core.Util;
 import ma.yc.airafraik.dao.Impl.ReservationDaoImpl;
 import ma.yc.airafraik.dao.ReservationDao;
@@ -11,6 +12,7 @@ import ma.yc.airafraik.service.ReservationService;
 public class ReservationServiceImpl implements ReservationService {
 
     private PaiementService paiementService ;
+    private ConfirmationReservationEtEnvoyeEmail confirmationReservationEtEnvoyeEmail;
     private ReservationDao reservationDao;
 
     public ReservationServiceImpl() {
@@ -51,7 +53,16 @@ public class ReservationServiceImpl implements ReservationService {
             // Handle the case where the flight type is none of the specified values
         }
 
-        this.reservationDao.ajouterReservation(reservationEntity);
+        boolean save = this.reservationDao.ajouterReservation(reservationEntity);
+        if (!save) {
+            // Handle the case where the reservation could not be saved
+            return 0;
+        }else {
+            //TODO : SEEND EMAIL TO CLIENT WITH HIS RESERVATION CODE AND PDF FILE
+            this.envoyerEmail(reservationEntity);
+
+        }
+
         return totalCost;
     }
 
@@ -61,5 +72,11 @@ public class ReservationServiceImpl implements ReservationService {
         // 8% des frais est retenue pour la société AirAfrika > 24h avant le vol
 
         return 1;
+    }
+
+    @Override
+    public boolean envoyerEmail(ReservationEntity reservationEntity) {
+
+        return false;
     }
 }

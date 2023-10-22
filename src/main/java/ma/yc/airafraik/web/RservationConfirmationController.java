@@ -103,10 +103,19 @@ public class RservationConfirmationController extends HttpServlet {
 
 
 
-        this.reservationService.confirmationReservation(reservationEntity);
+       Double prixtotal =  this.reservationService.confirmationReservation(reservationEntity);
 
+       if (prixtotal == 0){
+           resp.sendRedirect("/sorry-try-again.jsp");
+       }
 
-        resp.sendRedirect("/thank-you.jsp");
+        req.setAttribute("client",client);
+        req.setAttribute("reservation",reservationEntity);
+        req.setAttribute("prixTotal",prixtotal);
+
+        req.getRequestDispatcher("thank-you.jsp").forward(req, resp);
+        //TODO : DISTROY THE SESSION
+        session.invalidate();
 
     }
 

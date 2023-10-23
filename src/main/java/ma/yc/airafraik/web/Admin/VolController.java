@@ -90,12 +90,15 @@ public class VolController extends HttpServlet {
 
         vol.setPrix(prix);
 
-        if (this.volService.ajouterVol(vol))
-            request.setAttribute("message","Avion ajouté avec succès");
-        else
-            request.setAttribute("message","Erreur lors de l'ajout de l'avion");
 
-//        req.getRequestDispatcher("views/admin/dashboard.jsp").forward(req,resp);
+        if (this.volService.ajouterVol(vol)) {
+            message = "Vol ajouté avec succès";
+            request.setAttribute("message", message);
+        }else {
+            message = "Erreur lors de l'ajout du vol";
+            request.setAttribute("message", message);
+        }
+//        request.getRequestDispatcher("views/admin/dashboard.jsp").forward(request,resp);
         resp.sendRedirect("admin-dashboard");
     }
 }

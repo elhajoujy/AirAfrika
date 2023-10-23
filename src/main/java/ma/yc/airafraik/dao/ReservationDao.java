@@ -26,9 +26,7 @@ public interface ReservationDao {
     public ArrayList<ReservationEntity> AfficheLesStatistiques(HashMap<String , String> conditions, ReservationStatus reservationStatus);
     public ArrayList<ReservationEntity> lesRservationConfirmésPendantMoisOuAns(HashMap<String , String> conditions);
     public ArrayList<ReservationEntity> lesRservationAnnulésPendantMoisOuAns(HashMap<String , String> conditions);
+    int statisticsReservation(ReservationStatus reservationStatus, String mois);
 
-
-
-
-
+    boolean annulerReservation(ReservationEntity reservationEntity);
 }

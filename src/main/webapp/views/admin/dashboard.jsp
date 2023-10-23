@@ -12,51 +12,89 @@
 <%--    <jsp:include page="templates/header.jsp"/>--%>
 
     <jsp:include page="templates/header.jsp"/>
+    <c:if test="${empty message}">
+        <div class="alert alert-danger" role="alert">
+           Welcome to the admin dashboard
+        </div>
+    </c:if>
+    <c:if test="${not empty message}">
+        <div class="alert alert-success" role="alert">
+            ${message}
+        </div>
+    </c:if>
     <div class="container mt-3 preview-statistics-container">
         <h2>
             Show some statistics here
         </h2>
-        <div class="d-flex justify-content-center ">
-            <div class="col-xl-3 col-md-6 mb-4">
-                <div class="card border-left-primary shadow h-100 py-2">
-                    <div class="card-body">
-                        <div class="row no-gutters align-items-center">
-                            <div class="col mr-2">
-                                <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
-                                    cancelled yearly and monthly
-                                </div>
-                                <div class="h5 mb-0 font-weight-bold text-gray-800">
-                                    50 cancelled
-                                </div>
-                            </div>
-                            <div class="col-auto">
-                                <i class="fas fa-calendar fa-2x text-gray-300"></i>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-xl-3 col-md-6 mb-4">
-                <div class="card border-left-primary shadow h-100 py-2">
-                    <div class="card-body">
-                        <div class="row no-gutters align-items-center">
-                            <div class="col mr-2">
-                                <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
-                                    confirmed yearly and monthly
-                                </div>
-                                <div class="h5 mb-0 font-weight-bold text-gray-800">
-                                    50 confirmed
-                                </div>
-                            </div>
-                            <div class="col-auto">
-                                <i class="fas fa-calendar fa-2x text-gray-300"></i>
-                            </div>
-                        </div>
-                    </div>
+<%--        <div class="d-flex justify-content-center ">--%>
+<%--            <div class="col-xl-3 col-md-6 mb-4">--%>
+<%--                <div class="card border-left-primary shadow h-100 py-2">--%>
+<%--                    <div class="card-body">--%>
+<%--                        <div class="row no-gutters align-items-center">--%>
+<%--                            <div class="col mr-2">--%>
+<%--                                <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">--%>
+<%--                                    cancelled yearly and monthly--%>
+<%--                                </div>--%>
+<%--                                <div class="h5 mb-0 font-weight-bold text-gray-800">--%>
+<%--                                    10 mensuels et 20 annuels--%>
+<%--                                </div>--%>
+<%--                            </div>--%>
+<%--                            <div class="col-auto">--%>
+<%--                                <i class="fas fa-calendar fa-2x text-gray-300"></i>--%>
+<%--                            </div>--%>
+<%--                        </div>--%>
+<%--                    </div>--%>
+<%--                </div>--%>
+<%--            </div>--%>
+<%--            <div class="col-xl-3 col-md-6 mb-4">--%>
+<%--                <div class="card border-left-primary shadow h-100 py-2">--%>
+<%--                    <div class="card-body">--%>
+<%--                        <div class="row no-gutters align-items-center">--%>
+<%--                            <div class="col mr-2">--%>
+<%--                                <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">--%>
+<%--                                    confirmed yearly and monthly--%>
+<%--                                </div>--%>
+<%--                                <div class="h5 mb-0 font-weight-bold text-gray-800">--%>
+<%--                                    50 confirmed--%>
+<%--                                </div>--%>
+<%--                            </div>--%>
+<%--                            <div class="col-auto">--%>
+<%--                                <i class="fas fa-calendar fa-2x text-gray-300"></i>--%>
+<%--                            </div>--%>
+<%--                        </div>--%>
+<%--                    </div>--%>
+<%--                </div>--%>
+<%--            </div>--%>
+<%--        </div>--%>
+
+    </div>
+    <div class=" row show-statics d-flex  container m-auto">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Cancelled Reservations</h5>
+                    <p class="card-text">
+                        <strong>Monthly:</strong>
+                        <b>${nbrReservationAnullerMois}</b>
+                        <br>
+                        <strong>Yearly:</strong>  <b>${nbrReservationAnullerAnnee}</b>
+                    </p>
                 </div>
             </div>
         </div>
-
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Confirmed Reservations</h5>
+                    <p class="card-text">
+                        <strong>Monthly:</strong>
+                        <b>${nbrReservationConfirmerMois}</b>
+                        <br>
+                        <strong>Yearly:</strong> <b>${nbrReservationConfirmerAnnee}</b>
+                    </p>
+                </div>
+            </div>
+        </div>
     </div>
 
 
@@ -98,10 +136,10 @@
                                     <td>${vol.nomberDePlaces}</td>
                                     <td>
 
-                                        <a href="${pageContext.request.contextPath}/vol-supprimer?id=${vol.id}" class="btn btn-danger">Delete</a>
+                                        <a href="admin-delete-vol?idVol=${vol.id}" class="btn btn-danger">Delete</a>
                                     </td>
                                     <td>
-                                        <a href="${pageContext.request.contextPath}/vol-update?id=${vol.id}" class="btn btn-warning">update</a>
+                                        <a href="${pageContext.request.contextPath}/vol-update?idVol=${vol.id}" class="btn btn-warning">update</a>
                                     </td>
                                 </tr>
                             </c:forEach>

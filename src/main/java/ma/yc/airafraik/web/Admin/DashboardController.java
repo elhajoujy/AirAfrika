@@ -6,43 +6,103 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import ma.yc.airafraik.entities.VolEntity;
+import ma.yc.airafraik.enums.ReservationStatus;
 import ma.yc.airafraik.service.AccountService;
 import ma.yc.airafraik.service.AvionService;
-import ma.yc.airafraik.service.SearchVolsService;
+import ma.yc.airafraik.service.ReservationService;
+import ma.yc.airafraik.service.VolsService;
 import ma.yc.airafraik.service.impl.AccountAdminServiceImpl;
 import ma.yc.airafraik.service.impl.AvionServiceImpl;
-import ma.yc.airafraik.service.impl.SearchVolsServiceImpl;
+import ma.yc.airafraik.service.impl.ReservationServiceImpl;
+import ma.yc.airafraik.service.impl.VolsServiceImpl;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Collection;
+import java.util.Date;
+import java.util.HashMap;
 
-@WebServlet(name = "DashboardController", value = "/admin-dashboard")
+@WebServlet(name = "DashboardController", value = {"/admin-dashboard","/admin-delete-vol","/admin-add-vol","/admin-update-vol","/admin-add-avion","/admin-delete-avion","/admin-update-avion"})
 public class DashboardController extends HttpServlet {
 
     private AccountService accountService ;
     private boolean isAccountValid = true;
     private String message;
-    private SearchVolsService searchVolsService;
+    private VolsService volsService;
     private AvionService avionService;
+    private ReservationService reservationService;
 
 
     @Override
     public void init() throws ServletException {
         this.accountService = new  AccountAdminServiceImpl();
-        this.searchVolsService = new SearchVolsServiceImpl();
+        this.volsService = new VolsServiceImpl();
         this.avionService = new AvionServiceImpl();
+        this.reservationService = new ReservationServiceImpl();
     }
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 //        this.verifyAccount(req,resp);
+        if (req.getServletPath().equals("/admin-delete-vol")){
+            String idVol = req.getParameter("idVol");
+            boolean IsDeleted =  this.volsService.deleteVol(idVol);
+
+            if (IsDeleted){
+                message = "Vol supprimé avec succès";
+            }else{
+                message = "Erreur lors de la suppression du vol";
+            }
+        }
+
         req.setAttribute("message",message);
-        Collection<VolEntity> volEntities = this.searchVolsService.consulterVols();
+        Collection<VolEntity> volEntities = this.volsService.consulterVols();
         req.setAttribute("vols",volEntities);
         req.setAttribute("avions",this.avionService.consulterAvions());
+
+
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        Calendar calendar = Calendar.getInstance();
+
+// Get the current year
+        int currentYear = calendar.get(Calendar.YEAR);
+
+// Calculate dynamic dates for the current year
+        String currentYearStartDate = currentYear + "-01-01";
+        String currentYearEndDate = currentYear + "-12-31";
+
+        int nbrReservationAnullerAnnee = this.reservationService.statisticsReservation(ReservationStatus.ANNULER, generateConditions(currentYearStartDate, currentYearEndDate));
+        int nbrReservationConfirmerAnnee = this.reservationService.statisticsReservation(ReservationStatus.CONFIRMER, generateConditions(currentYearStartDate, currentYearEndDate));
+
+        Date currentDate = new Date();
+        calendar.setTime(currentDate);
+
+        String currentMonthStartDate = dateFormat.format(calendar.getTime());
+        calendar.add(Calendar.MONTH, 1); // Add one month to get the end of the current month
+        calendar.add(Calendar.DATE, -1); // Subtract one day to get the last day of the current month
+        String currentMonthEndDate = dateFormat.format(calendar.getTime());
+
+        int nbrReservationConfirmerMois = this.reservationService.statisticsReservation(ReservationStatus.CONFIRMER, generateConditions(currentMonthStartDate, currentMonthEndDate));
+        int nbrReservationAnullerMois = this.reservationService.statisticsReservation(ReservationStatus.ANNULER, generateConditions(currentYearStartDate, currentMonthEndDate));
+
+
+
+        req.setAttribute("nbrReservationAnullerMois",nbrReservationAnullerMois);
+        req.setAttribute("nbrReservationAnullerAnnee",nbrReservationAnullerAnnee);
+        req.setAttribute("nbrReservationConfirmerMois",nbrReservationConfirmerMois);
+        req.setAttribute("nbrReservationConfirmerAnnee",nbrReservationConfirmerAnnee);
+        req.setAttribute("message",message);
         req.getRequestDispatcher("views/admin/dashboard.jsp").forward(req,resp);
 
 
+    }
+
+    public HashMap<String, String> generateConditions(String startDate, String endDate) {
+        HashMap<String, String> conditions = new HashMap<>();
+        conditions.put("date_1", startDate);
+        conditions.put("date_2", endDate);
+        return conditions;
     }
 
     private void verifyAccount(HttpServletRequest req, HttpServletResponse resp) {
@@ -70,6 +130,7 @@ public class DashboardController extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+
         super.doPost(req, resp);
     }
 

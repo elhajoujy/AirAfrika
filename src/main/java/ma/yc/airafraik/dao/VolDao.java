@@ -25,4 +25,6 @@ public interface VolDao {
     public VolEntity consulterVol(String id);
     public ArrayList<VolEntity> consulterVols(HashMap<String, String> conditions);
     public Collection<VolEntity> consulterVols();
+
+    boolean deleteVol(String idVol);
 }

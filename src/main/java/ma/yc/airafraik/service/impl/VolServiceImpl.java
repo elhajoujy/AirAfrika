@@ -3,18 +3,18 @@ package ma.yc.airafraik.service.impl;
 import ma.yc.airafraik.dao.Impl.VolDaoImpl;
 import ma.yc.airafraik.dao.VolDao;
 import ma.yc.airafraik.entities.VolEntity;
-import ma.yc.airafraik.service.SearchVolsService;
+import ma.yc.airafraik.service.VolsService;
 import ma.yc.airafraik.service.VolService;
 
 public class VolServiceImpl implements VolService {
 
     private VolDao volDao;
-    private SearchVolsService searchVolsService;
+    private VolsService volsService;
 
 
     public VolServiceImpl() {
         this.volDao = new VolDaoImpl();
-        this.searchVolsService = new SearchVolsServiceImpl();
+        this.volsService = new VolsServiceImpl();
     }
 
     @Override
@@ -25,7 +25,7 @@ public class VolServiceImpl implements VolService {
 
     @Override
     public boolean supprimerVol(String id) {
-        VolEntity vol = this.searchVolsService.searchVolParId(id);
+        VolEntity vol = this.volsService.searchVolParId(id);
         return this.volDao.supprimerVol(vol);
     }
 }

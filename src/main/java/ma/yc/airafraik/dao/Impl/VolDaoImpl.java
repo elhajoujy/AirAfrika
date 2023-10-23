@@ -236,5 +236,29 @@ public class VolDaoImpl implements VolDao {
         return volEntities;
     }
 
+    @Override
+    public boolean deleteVol(String idVol) {
+        Integer id = Integer.parseInt(idVol);
+        String jpql = "DELETE FROM VolEntity v WHERE v.id = :code";
+        Query query = entityManager.createQuery(jpql);
+        query.setParameter("code", id);
+        try {
+            transaction.begin();
+            if (query.executeUpdate() > 0) {
+                Print.log("Vol supprimé avec succès");
+                transaction.commit();
+                return true;
+            }
+            Print.log("Erreur lors de la suppression du vol");
+            transaction.rollback();
+        }catch (Exception e){
+            if (transaction != null && transaction.isActive()) {
+                transaction.rollback(); // Rollback the transaction in case of an exception
+            }
+
+        }
+        return false;
+    }
+
 
 }

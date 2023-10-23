@@ -16,6 +16,21 @@ services:
     networks:
       - db
     restart: unless-stopped
+  airafraik_test:
+    image: postgres
+    environment:
+      POSTGRES_USER: ${USER}
+      POSTGRES_PASSWORD: ${PASSWORD}
+      POSTGRES_DB: ${DATABASE}
+      PGUSER: ${USER}
+      PGDATA: /data/postgres
+    volumes:
+      - db:/data/postgres
+    ports:
+      - "5331:5431"
+    networks:
+      - db
+    restart: unless-stopped
 
 networks:
   db:

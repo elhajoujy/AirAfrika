@@ -14,25 +14,23 @@ import ma.yc.airafraik.entities.ReservationEntity;
 import ma.yc.airafraik.entities.VolEntity;
 import ma.yc.airafraik.enums.ReservationStatus;
 import ma.yc.airafraik.service.ReservationService;
-import ma.yc.airafraik.service.SearchVolsService;
+import ma.yc.airafraik.service.VolsService;
 import ma.yc.airafraik.service.impl.ReservationServiceImpl;
-import ma.yc.airafraik.service.impl.SearchVolsServiceImpl;
-import org.hibernate.Session;
+import ma.yc.airafraik.service.impl.VolsServiceImpl;
 
 import java.io.IOException;
 import java.sql.Timestamp;
-import java.util.Collection;
 
 @WebServlet(name = "RservationConfirmationController", value = "/reservation-confirmation")
 public class RservationConfirmationController extends HttpServlet {
 
-    private SearchVolsService searchVolsService ;
+    private VolsService volsService;
     private ReservationService reservationService;
     private HttpSession session;
     private ServletContext context;
     @Override
     public void init(ServletConfig config) throws ServletException {
-        this.searchVolsService = new SearchVolsServiceImpl();
+        this.volsService = new VolsServiceImpl();
         this.context = config.getServletContext();
         this.reservationService = new ReservationServiceImpl();
     }
@@ -46,7 +44,7 @@ public class RservationConfirmationController extends HttpServlet {
 
         if (id != null) {
             Print.log("id : " + id);
-            VolEntity vols = searchVolsService.searchVolParId(id);
+            VolEntity vols = volsService.searchVolParId(id);
             req.setAttribute("vols",vols);
 //            reservationEntity.setVolEntities((Collection<VolEntity>) req.getSession().getAttribute("vols"));
 //            reservationEntity.setPrixTotal((Double) req.getSession().getAttribute("prixTotal"));

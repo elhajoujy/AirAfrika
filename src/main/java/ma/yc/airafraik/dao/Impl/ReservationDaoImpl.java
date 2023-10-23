@@ -57,7 +57,9 @@ public class ReservationDaoImpl  implements ReservationDao{
 
     @Override
     public Collection<ReservationEntity> consulterReservations(String code) {
-        return null;
+        Query query = entityManager.createNativeQuery("SELECT * FROM reservation where code = :code",ReservationEntity.class);
+        query.setParameter("code",code);
+        return (Collection<ReservationEntity>) query.getResultList();
     }
 
 
@@ -78,7 +80,7 @@ public class ReservationDaoImpl  implements ReservationDao{
         Query query = entityManager.createNativeQuery("SELECT * FROM reservation WHERE date_reservation BETWEEN :date_1 AND :date_2 AND status = :etat_reservation", ReservationEntity.class);
         query.setParameter("date_1", conditions.get("date_1"));
         query.setParameter("date_2", conditions.get("date_2"));
-        query.setParameter("etat_reservation", ReservationStatus.CONFIRMED.toString());
+        query.setParameter("etat_reservation", ReservationStatus.CONFIRMER.toString());
         ArrayList<ReservationEntity> reservationEntities = (ArrayList<ReservationEntity>) query.getResultList();
 
         return reservationEntities;
@@ -92,5 +94,27 @@ public class ReservationDaoImpl  implements ReservationDao{
         query.setParameter("etat_reservation", ReservationStatus.ANNULER.toString());
         ArrayList<ReservationEntity> reservationEntities = (ArrayList<ReservationEntity>) query.getResultList();
         return reservationEntities;
+    }
+
+    @Override
+    public int statisticsReservation(ReservationStatus reservationStatus, String mois) {
+        this.entityManager.createNativeQuery("SELECT count(*) FROM reservation WHERE status = :status AND date_reservation LIKE :mois")
+                .setParameter("status",reservationStatus.toString())
+                .setParameter("mois",mois)
+                .getSingleResult();
+        return 0;
+    }
+
+    @Override
+    public boolean annulerReservation(ReservationEntity reservationEntity) {
+        if (reservationEntity == null){
+            return false;
+        }
+
+        this.transaction.begin();
+        ReservationEntity reservationEntity1 = entityManager.find(ReservationEntity.class, reservationEntity.getId());
+        reservationEntity1.setStatus(ReservationStatus.ANNULER);
+        this.transaction.commit();
+        return false;
     }
 }

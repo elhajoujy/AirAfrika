@@ -5,11 +5,9 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import ma.yc.airafraik.core.Print;
 import ma.yc.airafraik.entities.AvionEntity;
 import ma.yc.airafraik.entities.VolEntity;
 import ma.yc.airafraik.service.AvionService;
-import ma.yc.airafraik.service.SearchVolsService;
 import ma.yc.airafraik.service.VolService;
 import ma.yc.airafraik.service.impl.VolServiceImpl;
 

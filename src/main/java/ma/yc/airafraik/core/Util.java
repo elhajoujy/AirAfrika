@@ -151,6 +151,13 @@ public class Util {
         return vol;
     }
 
+    public static Date addHours(int i) {
+        Print.log("i : "+i);
+        Date date =new Date(new Date().getTime() + i * 60 * 60 * 1000);
+        return  date;
+
+    }
+
     //add more helper method
     //todo : work with local storage to store information
     public boolean storeInformation(String key , String value){

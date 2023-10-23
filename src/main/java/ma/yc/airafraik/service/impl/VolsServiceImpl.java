@@ -2,18 +2,17 @@ package ma.yc.airafraik.service.impl;
 
 import ma.yc.airafraik.dao.Impl.VolDaoImpl;
 import ma.yc.airafraik.dao.VolDao;
-import ma.yc.airafraik.entities.ReservationEntity;
 import ma.yc.airafraik.entities.VolEntity;
+import ma.yc.airafraik.service.VolsService;
 
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 
-public class SearchVolsServiceImpl implements ma.yc.airafraik.service.SearchVolsService{
+public class VolsServiceImpl implements VolsService {
 
     private VolDao volDao ;
 
-    public SearchVolsServiceImpl() {
+    public VolsServiceImpl() {
         this.volDao = new VolDaoImpl();
     }
 
@@ -44,5 +43,12 @@ public class SearchVolsServiceImpl implements ma.yc.airafraik.service.SearchVols
     @Override
     public Collection<VolEntity> consulterVols() {
         return this.volDao.consulterVols();
+    }
+
+    @Override
+    public boolean deleteVol(String idVol) {
+
+        if (idVol == null) return false;
+        return this.volDao.deleteVol(idVol);
     }
 }

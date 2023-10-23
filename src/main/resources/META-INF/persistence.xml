@@ -10,19 +10,13 @@
         </description>
         <provider >org.hibernate.jpa.HibernatePersistenceProvider</provider>
         <exclude-unlisted-classes>false</exclude-unlisted-classes>
-<!--        <class>ma.yc.airafraik.entities.ClientEntity</class>-->
-<!--        <class>ma.yc.airafraik.entities.VolEntity</class>-->
-
-
-
-
         <properties>
             <property name="hibernate.connection.driver_class" value="org.postgresql.Driver"/>
             <property name="jakarta.persistence.jdbc.url" value="jdbc:postgresql://127.0.0.1:5332/AIRAFRIK"/>
             <property name="jakarta.persistence.jdbc.user" value="pc"/>
             <property name="jakarta.persistence.jdbc.password" value="password"/>
-            <property name="jakarta.persistence.schema-generation.database.action" value="none"/>
-            
+            <property name="jakarta.persistence.schema-generation.database.action" value="create"/>
+
             <property name="hibernate.connection.url" value="jdbc:postgresql://127.0.0.1:5332/AIRAFRIK"/>
             <property name="hibernate.connection.username" value="pc"/>
             <property name="hibernate.connection.password" value="password"/>

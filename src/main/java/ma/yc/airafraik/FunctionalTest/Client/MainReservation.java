@@ -100,7 +100,7 @@ public class MainReservation {
                 //
                 //TODO : CONFIRMATION
                 if (false){
-                    reservationEntity.setStatus(ReservationStatus.CONFIRMED);
+                    reservationEntity.setStatus(ReservationStatus.CONFIRMER);
 
                 }
 

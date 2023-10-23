@@ -43,7 +43,7 @@ public class EmailProvider  {
             message.setFrom(new InternetAddress(username));
             message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(email));
             message.setSubject(subject);
-            message.setText("Here is the code of verification authentic: "+body);
+            message.setText(body);
             Transport.send(message);
             return true;
         } catch (MessagingException e) {

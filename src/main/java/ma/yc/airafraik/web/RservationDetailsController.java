@@ -7,12 +7,11 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import ma.yc.airafraik.core.Print;
-import ma.yc.airafraik.entities.ReservationEntity;
 import ma.yc.airafraik.entities.VolEntity;
 import ma.yc.airafraik.service.ReservationService;
-import ma.yc.airafraik.service.SearchVolsService;
+import ma.yc.airafraik.service.VolsService;
 import ma.yc.airafraik.service.impl.ReservationServiceImpl;
-import ma.yc.airafraik.service.impl.SearchVolsServiceImpl;
+import ma.yc.airafraik.service.impl.VolsServiceImpl;
 
 import java.io.IOException;
 
@@ -20,12 +19,12 @@ import java.io.IOException;
 public class RservationDetailsController extends HttpServlet {
 
     private ReservationService reservationService ;
-    private SearchVolsService searchVolsService;
+    private VolsService volsService;
 
     @Override
     public void init(ServletConfig config) throws ServletException {
         reservationService = new ReservationServiceImpl();
-        searchVolsService = new SearchVolsServiceImpl();
+        volsService = new VolsServiceImpl();
         super.init(config);
     }
 
@@ -36,7 +35,7 @@ public class RservationDetailsController extends HttpServlet {
 
         String id = req.getParameter("id");
         Print.log("id : " + id);
-        VolEntity vol = searchVolsService.searchVolParId(id);
+        VolEntity vol = volsService.searchVolParId(id);
         req.setAttribute("vol",vol);
         //TODO : we will use this attribute in the jsp page
         req.getSession().setAttribute("vol",vol);

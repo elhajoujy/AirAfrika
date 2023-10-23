@@ -9,8 +9,8 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import ma.yc.airafraik.core.Print;
 import ma.yc.airafraik.entities.VolEntity;
-import ma.yc.airafraik.service.SearchVolsService;
-import ma.yc.airafraik.service.impl.SearchVolsServiceImpl;
+import ma.yc.airafraik.service.VolsService;
+import ma.yc.airafraik.service.impl.VolsServiceImpl;
 
 import java.io.IOException;
 import java.util.Collection;
@@ -18,12 +18,12 @@ import java.util.Collection;
 @WebServlet(name = "RechercheVolController", value = "/recherche")
 public class RechercheVolController  extends HttpServlet {
 
-    private SearchVolsService searchVolsService ;
+    private VolsService volsService;
     private ServletContext context;
 
     @Override
     public void init(ServletConfig config) throws ServletException {
-        this.searchVolsService = new SearchVolsServiceImpl();
+        this.volsService = new VolsServiceImpl();
         this.context = config.getServletContext();
     }
 
@@ -56,7 +56,7 @@ public class RechercheVolController  extends HttpServlet {
             req.getRequestDispatcher("index.jsp").forward(req, resp);
         }else{
             //TODO : if those information are not null then we will search for the vols
-            Collection<VolEntity> vols = searchVolsService.searchVols(origin,depart,departuredate,retourdate,"1");
+            Collection<VolEntity> vols = volsService.searchVols(origin,depart,departuredate,retourdate,"1");
             req.setAttribute("vols",vols);
             req.getRequestDispatcher("recherche-page.jsp").forward(req, resp);
         }

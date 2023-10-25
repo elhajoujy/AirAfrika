@@ -70,6 +70,9 @@ public class ReservationEntity {
     @Column(name = "cancelled")
     private boolean cancelled;
 
+    @OneToOne
+    private BagageEntity bagage ;
+
 
     @ManyToMany
     @JoinTable(

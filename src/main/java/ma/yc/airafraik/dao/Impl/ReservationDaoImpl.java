@@ -26,6 +26,7 @@ public class ReservationDaoImpl  implements ReservationDao{
             for (VolEntity vol:reservationEntity.getVolEntities()){
                 entityManager.persist(vol);
             }
+            entityManager.persist(reservationEntity.getBagage());
             entityManager.persist(reservationEntity);
             transaction.commit();
             return true;

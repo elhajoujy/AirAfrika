@@ -110,12 +110,13 @@ public class RservationConfirmationController extends HttpServlet {
 
         // TODO: 25/10/2023 BAGAGE
         BagageEntity bagageEntity = new BagageEntity();
-        double poids = Double.parseDouble(req.getParameter("poids"));
-        double prixPoids = Double.parseDouble(req.getParameter("poids"));
-        bagageEntity.setPrix(bagageService.calculerPrixBagage(prixPoids));
+        String poidsString = req.getParameter("poids") == null ? "0" : req.getParameter("poids");
+        double poids = Double.parseDouble(poidsString);
+        bagageEntity.setPrix(bagageService.calculerPrixBagage(poids));
         bagageEntity.setPoids(poids);
 
         reservationEntity.setPrixTotal(prixTotal + bagageEntity.getPrix());
+        reservationEntity.setBagage(bagageEntity);
 
        Double prixtotal =  this.reservationService.confirmationReservation(reservationEntity);
 

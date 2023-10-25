@@ -46,7 +46,7 @@
 
 <%--            Bagage --%>
             <div class="form-group">
-                <label for="bagage">Bagage: </label>
+                <label for="bagage">Bagage: (Kg)</label>
                 <input type="number" name="baagae" id="bagage" >
             </div>
 

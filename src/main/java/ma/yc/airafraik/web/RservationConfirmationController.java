@@ -9,12 +9,15 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import ma.yc.airafraik.core.Print;
+import ma.yc.airafraik.entities.BagageEntity;
 import ma.yc.airafraik.entities.ClientEntity;
 import ma.yc.airafraik.entities.ReservationEntity;
 import ma.yc.airafraik.entities.VolEntity;
 import ma.yc.airafraik.enums.ReservationStatus;
+import ma.yc.airafraik.service.BagageService;
 import ma.yc.airafraik.service.ReservationService;
 import ma.yc.airafraik.service.VolsService;
+import ma.yc.airafraik.service.impl.BagageServiceImpl;
 import ma.yc.airafraik.service.impl.ReservationServiceImpl;
 import ma.yc.airafraik.service.impl.VolsServiceImpl;
 
@@ -26,13 +29,16 @@ public class RservationConfirmationController extends HttpServlet {
 
     private VolsService volsService;
     private ReservationService reservationService;
+    private BagageService bagageService;
     private HttpSession session;
     private ServletContext context;
+    private String message ;
     @Override
     public void init(ServletConfig config) throws ServletException {
         this.volsService = new VolsServiceImpl();
         this.context = config.getServletContext();
         this.reservationService = new ReservationServiceImpl();
+        this.bagageService = new BagageServiceImpl();
     }
 
     @Override
@@ -90,16 +96,26 @@ public class RservationConfirmationController extends HttpServlet {
         VolEntity vol = (VolEntity) req.getSession().getAttribute("vol");
         reservationEntity.setStatus(ReservationStatus.EN_ATTENTE);
         reservationEntity.getVolEntities().add(vol);
+
+        // TODO: 25/10/2023 call prix total de la reservation
         double prixTotal = vol.getPrix() * (Integer) context.getAttribute("numberDeAdultes")
                 + vol.getPrix() * (Integer) context.getAttribute("numberDeEnfants")
                 + vol.getPrix() * (Integer) context.getAttribute("numberDeBebes");
-        reservationEntity.setPrixTotal(prixTotal);
+
         reservationEntity.setDate_Reservation(new Timestamp(System.currentTimeMillis()));
         reservationEntity.setNumberDeAdulets(((Integer) context.getAttribute("numberDeAdultes")));
         reservationEntity.setNumberDeEnfants((Integer) context.getAttribute("numberDeEnfants"));
         reservationEntity.setNumberDeBebes((Integer) context.getAttribute("numberDeBebes"));
 
 
+        // TODO: 25/10/2023 BAGAGE
+        BagageEntity bagageEntity = new BagageEntity();
+        double poids = Double.parseDouble(req.getParameter("poids"));
+        double prixPoids = Double.parseDouble(req.getParameter("poids"));
+        bagageEntity.setPrix(bagageService.calculerPrixBagage(prixPoids));
+        bagageEntity.setPoids(poids);
+
+        reservationEntity.setPrixTotal(prixTotal + bagageEntity.getPrix());
 
        Double prixtotal =  this.reservationService.confirmationReservation(reservationEntity);
 
@@ -110,6 +126,7 @@ public class RservationConfirmationController extends HttpServlet {
         req.setAttribute("client",client);
         req.setAttribute("reservation",reservationEntity);
         req.setAttribute("prixTotal",prixtotal);
+        req.setAttribute("bagage",bagageEntity);
 
         req.getRequestDispatcher("thank-you.jsp").forward(req, resp);
         //TODO : DISTROY THE SESSION

@@ -44,6 +44,13 @@
                 <input type="tel" class="form-control" id="telephone" name="telephone" required>
             </div>
 
+<%--            Bagage --%>
+            <div class="form-group">
+                <label for="bagage">Bagage: </label>
+                <input type="number" name="baagae" id="bagage" >
+            </div>
+
+
             <button type="submit" class="btn btn-primary">Submit</button>
         </form>
     </div>

@@ -60,14 +60,12 @@ public class Util {
     }
 
     public static String readString(String key , Scanner scanner){
-        //todo : fix this bug
         scanner.nextLine();
         Print.log(key+" : ");
         return scanner.nextLine();
     }
 
     public static String readString(String key , Scanner scanner, String defaultValue){
-        //todo : fix this bug
         scanner.nextLine();
         Print.log(key+" : ");
         String input = scanner.nextLine();
@@ -159,9 +157,8 @@ public class Util {
     }
 
     //add more helper method
-    //todo : work with local storage to store information
     public boolean storeInformation(String key , String value){
-        //todo : store the information in the local storage
+        // : store the information in the local storage
         return false;
     }
 }

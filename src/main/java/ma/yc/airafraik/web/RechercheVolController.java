@@ -7,6 +7,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import ma.yc.airafraik.core.Print;
 import ma.yc.airafraik.entities.VolEntity;
 import ma.yc.airafraik.service.VolsService;
@@ -20,6 +21,8 @@ public class RechercheVolController  extends HttpServlet {
 
     private VolsService volsService;
     private ServletContext context;
+    private HttpSession session;
+    private String message ;
 
     @Override
     public void init(ServletConfig config) throws ServletException {
@@ -53,6 +56,7 @@ public class RechercheVolController  extends HttpServlet {
 
 
         if (depart == null  || origin == null || departuredate == null ) {
+            this.message = "Veuillez remplir tous les champs";
             req.getRequestDispatcher("index.jsp").forward(req, resp);
         }else{
             //TODO : if those information are not null then we will search for the vols

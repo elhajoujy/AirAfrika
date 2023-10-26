@@ -25,15 +25,14 @@ public class VolsServiceImpl implements VolsService {
 //        conditions.put("dateDepart",dateDepart);
 //        conditions.put("dateArrive",dateArrivee);
 //        conditions.put("nombrePassagers",nombrePassagers);
-
-        return this.volDao.consulterVols(conditions);
+        Collection<VolEntity> vols = this.volDao.consulterVols(conditions);
+        return vols;
     }
 
     @Override
     public VolEntity searchVolParId(String id) {
         if (id == null) return null;
        VolEntity vol =  this.volDao.consulterVol(id);
-
 
        return  vol;
 

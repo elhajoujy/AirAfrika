@@ -36,7 +36,7 @@ public class MainReservation {
         }
 
         public static void confirmationReservation(){
-            //todo : client remplir les infrmations de base nom prenom email telephone  ;
+            // : client remplir les infrmations de base nom prenom email telephone  ;
             HyperJpa jpa = HyperJpa.getInstance();
             EntityManager em = jpa.getEntityManager();
 
@@ -73,7 +73,7 @@ public class MainReservation {
 
 
 
-                  //TODO : SEARCH FOR POSSIBLE VOLS IN THIS DATE
+                  // : SEARCH FOR POSSIBLE VOLS IN THIS DATE
                 //ArrayList<VolEntity> volEntities = FakeEntitesHelper.VolsPossibleParVilleDepartEtVilleArrivee("SAFI" , "RABAT");
 //                ADD EXTRACTS FOR EACH VOL
 //                volEntities.forEach(volEntity -> {
@@ -94,11 +94,11 @@ public class MainReservation {
 
 
 
-                //TODO : et le processus de paiement
+                // : et le processus de paiement
                 PaymentEntity paymentEntity = new PaymentEntity();
 
                 //
-                //TODO : CONFIRMATION
+                // : CONFIRMATION
                 if (false){
                     reservationEntity.setStatus(ReservationStatus.CONFIRMER);
 

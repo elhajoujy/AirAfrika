@@ -23,7 +23,7 @@ public class LesStatistiques {
         HashMap<String, String> conditions = new HashMap<>();
 
 
-        //TODO : THE CLIENT WIL CHOOSE TWO DATE CALLED DATE_1 AND DATE_2 FROM THE CALENDER
+        // : THE CLIENT WIL CHOOSE TWO DATE CALLED DATE_1 AND DATE_2 FROM THE CALENDER
         conditions.put("date_1", "2020-01-01");
         conditions.put("date_2", "2023-12-31");
 

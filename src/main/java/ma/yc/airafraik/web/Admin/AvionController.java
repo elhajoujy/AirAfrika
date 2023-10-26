@@ -29,7 +29,7 @@ public class AvionController extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse resp) throws ServletException, IOException {
-        //TODO : AJOUTER NOUVEAU AVION AND GO BACK TO ADMIN DASHBOARD
+        // : AJOUTER NOUVEAU AVION AND GO BACK TO ADMIN DASHBOARD
         String code = request.getParameter("code");
         String heureDepart = request.getParameter("heure_depart");
         String heureArrivee = request.getParameter("heure_arrivee");

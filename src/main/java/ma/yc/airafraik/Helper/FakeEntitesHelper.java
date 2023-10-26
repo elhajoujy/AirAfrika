@@ -81,7 +81,7 @@ public class FakeEntitesHelper {
         reservationEntity.setCancelled(false);
         //THIS WILL BE DECIDED NEXT TIME
         reservationEntity.setClient(null);
-        //TODO : WHEN WE SEARCH FOR POSSIBLE VOLS THIS WILL BE FILLED
+        // : WHEN WE SEARCH FOR POSSIBLE VOLS THIS WILL BE FILLED
         reservationEntity.setVolEntities(null);
 
         return reservationEntity;

@@ -27,7 +27,6 @@ public class ReservationEntity {
     private double prixTotal ;
     @Column(name = "date_reservation")
     private Timestamp date_Reservation;
-    //TODO : CLIENT RESERVE PLUSIERE
     @ManyToOne
     @JoinColumn(name = "client_id")
     private ClientEntity client ;

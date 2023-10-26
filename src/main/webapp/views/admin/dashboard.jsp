@@ -125,7 +125,7 @@
                             </tr>
                             </thead>
                             <tbody>
-<%--                            TODO : LOOP INTO VOLS AND SHOW THEM HERE
+<%--                             : LOOP INTO VOLS AND SHOW THEM HERE
 --%>
                             <c:forEach items="${vols}" var="vol">
                                 <tr>

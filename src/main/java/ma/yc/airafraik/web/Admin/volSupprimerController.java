@@ -26,6 +26,7 @@ public class volSupprimerController extends HttpServlet {
        String id = req.getParameter("id");
       boolean isSupprimer = this.volService.supprimerVol(id);
       if(isSupprimer){
+            req.setAttribute("message","Vol supprimer avec succes");
         //TODO : SOMETHIGN TO DO
       }
 

@@ -67,7 +67,7 @@ public class ReservationServiceImpl implements ReservationService {
             // Handle the case where the reservation could not be saved
             return 0;
         }else {
-            //TODO : SEEND EMAIL TO CLIENT WITH HIS RESERVATION CODE AND PDF FILE
+            // : SEEND EMAIL TO CLIENT WITH HIS RESERVATION CODE AND PDF FILE
             if (this.envoyerEmail(reservationEntity))
             {
                 Print.log("Email sent successfully");
@@ -95,7 +95,7 @@ public class ReservationServiceImpl implements ReservationService {
         if (numeroReservation == null){
             return false;
         }
-        //TODO : annuler sa réservation après la confirmation de son vol dans le cas d'annulation:
+        // : annuler sa réservation après la confirmation de son vol dans le cas d'annulation:
         // 8% des frais est retenue pour la société AirAfrika > 24h avant le vol
 
         Collection<ReservationEntity> reservationEntities = this.reservationDao.consulterReservations(numeroReservation);
@@ -107,7 +107,7 @@ public class ReservationServiceImpl implements ReservationService {
                 return false;
             }
             if (reservationEntity.getStatus() == ReservationStatus.CONFIRMER || reservationEntity.getStatus() == ReservationStatus.EN_ATTENTE){
-                //TODO : THE CLIENT CAN'T CANCEL HIS RESERVATION AFTER 24H BEFORE THE FLIGHT
+                // : THE CLIENT CAN'T CANCEL HIS RESERVATION AFTER 24H BEFORE THE FLIGHT
                 reservationEntity.setStatus(ReservationStatus.ANNULER);
 
                 for (VolEntity vol : reservationEntity.getVolEntities()){
@@ -117,7 +117,7 @@ public class ReservationServiceImpl implements ReservationService {
                     if (vol.getDateDepart().before(Util.addHours(24))){
                         return false;
                     }else {
-                        //TODO : THE CLIENT WILL PAY 8% OF THE TOTAL COST OF THE FLIGHT
+                        // : THE CLIENT WILL PAY 8% OF THE TOTAL COST OF THE FLIGHT
                         double totalCost = reservationEntity.getPrixTotal();
                         double cost = totalCost * 0.08;
                         reservationEntity.setPrixTotal(totalCost - cost);
@@ -155,7 +155,7 @@ public class ReservationServiceImpl implements ReservationService {
     public int statisticsReservation(ReservationStatus reservationStatus,HashMap<String, String> conditions) {
 
 
-        //TODO : THE CLIENT WIL CHOOSE TWO DATE CALLED DATE_1 AND DATE_2 FROM THE CALENDER
+        // : THE CLIENT WIL CHOOSE TWO DATE CALLED DATE_1 AND DATE_2 FROM THE CALENDER
 
 
         if (reservationStatus == null || conditions == null){

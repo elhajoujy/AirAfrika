@@ -1,5 +1,7 @@
 package ma.yc.airafraik.web.Admin;
 
+import jakarta.servlet.ServletConfig;
+import jakarta.servlet.ServletContext;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -27,12 +29,18 @@ import java.util.HashMap;
 public class DashboardController extends HttpServlet {
 
     private AccountService accountService ;
-    private boolean isAccountValid = true;
+    private boolean isAuthentified = false;
     private String message;
     private VolsService volsService;
     private AvionService avionService;
     private ReservationService reservationService;
+    private ServletContext context;
 
+
+    @Override
+    public void init(ServletConfig config) throws ServletException {
+        super.init(config);
+    }
 
     @Override
     public void init() throws ServletException {
@@ -40,11 +48,18 @@ public class DashboardController extends HttpServlet {
         this.volsService = new VolsServiceImpl();
         this.avionService = new AvionServiceImpl();
         this.reservationService = new ReservationServiceImpl();
+
+
     }
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-//        this.verifyAccount(req,resp);
+
+        if (this.verifyAccount(req,resp)){
+            return ;
+        }
+
+
         if (req.getServletPath().equals("/admin-delete-vol")){
             String idVol = req.getParameter("idVol");
             boolean IsDeleted =  this.volsService.deleteVol(idVol);
@@ -105,7 +120,22 @@ public class DashboardController extends HttpServlet {
         return conditions;
     }
 
-    private void verifyAccount(HttpServletRequest req, HttpServletResponse resp) {
+    private boolean verifyAccount(HttpServletRequest req, HttpServletResponse resp) {
+        this.isAuthentified = req.getSession().getAttribute("isAuthentified") != null;
+        if (!isAuthentified){
+            try {
+                req.getRequestDispatcher("views/admin/login.jsp").forward(req,resp);
+                return true;
+            } catch (IOException e) {
+                e.printStackTrace();
+                return false;
+            } catch (ServletException e) {
+                throw new RuntimeException(e);
+            }
+        }
+
+
+
 //        ma.yc.airafraik.dto.Account account = (ma.yc.airafraik.dto.Account) req.getSession().getAttribute("account");
 //        if(account != null){
 //            if(accountService.isAccountValid(account)){
@@ -121,6 +151,8 @@ public class DashboardController extends HttpServlet {
 //                e.printStackTrace();
 //            }
 //        }
+
+        return false;
     }
 
     @Override

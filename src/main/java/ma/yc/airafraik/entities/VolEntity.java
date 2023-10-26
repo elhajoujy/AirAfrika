@@ -90,7 +90,5 @@ public class VolEntity {
                 '}';
     }
 
-    //TODO : JE PEUX ENRGISTER  LES VILLE DEPART ET ARRIVE ETQ OBJET
-    //TODO : AUSSI LES INFORMATION DE AERPORT ;
 
 }

@@ -39,6 +39,7 @@ public class RservationConfirmationController extends HttpServlet {
         this.context = config.getServletContext();
         this.reservationService = new ReservationServiceImpl();
         this.bagageService = new BagageServiceImpl();
+
     }
 
     @Override
@@ -60,8 +61,8 @@ public class RservationConfirmationController extends HttpServlet {
 //            reservationEntity.setNumberDeBebes((Integer) req.getSession().getAttribute("numberDeBebe"));
 
             session.setAttribute("vols", vols);
-            prixTotal = vols.getPrix() * (Integer) session.getAttribute("numberDeAdultes") + vols.getPrix() * (Integer) session.getAttribute("numberDeEnfants") + vols.getPrix() * (Integer) session.getAttribute("numberDeBebes");
-            session.setAttribute("prixTotal", prixTotal);
+            prixTotal = vols.getPrix() * (Integer) context.getAttribute("numberDeAdultes") + vols.getPrix() * (Integer) context.getAttribute("numberDeEnfants") + vols.getPrix() * (Integer) context.getAttribute("numberDeBebes");
+            context.setAttribute("prixTotal", prixTotal);
 
 
             req.getRequestDispatcher("reservation-confirmation.jsp").forward(req, resp);
@@ -74,6 +75,7 @@ public class RservationConfirmationController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         // Get the values from the form
+        HttpSession session = req.getSession(); // Get the session associated with the request
 
 
         String nom = req.getParameter("nom");
@@ -110,13 +112,13 @@ public class RservationConfirmationController extends HttpServlet {
 
         // TODO: 25/10/2023 BAGAGE
         BagageEntity bagageEntity = new BagageEntity();
-        String poidsString = req.getParameter("poids") == null ? "0" : req.getParameter("poids");
+        String poidsString = req.getParameter("poids") == null ? "0" : req.getParameter("baagae");
         double poids = Double.parseDouble(poidsString);
         bagageEntity.setPrix(bagageService.calculerPrixBagage(poids));
         bagageEntity.setPoids(poids);
 
-        reservationEntity.setPrixTotal(prixTotal + bagageEntity.getPrix());
-        reservationEntity.setBagage(bagageEntity);
+        reservationEntity.setPrixTotal(prixTotal);
+//        reservationEntity.setBagage(bagageEntity);
 
        Double prixtotal =  this.reservationService.confirmationReservation(reservationEntity);
 
@@ -129,9 +131,11 @@ public class RservationConfirmationController extends HttpServlet {
         req.setAttribute("prixTotal",prixtotal);
         req.setAttribute("bagage",bagageEntity);
 
-        req.getRequestDispatcher("thank-you.jsp").forward(req, resp);
+       if (prixtotal != 0) {
+           req.getRequestDispatcher("reservation-confirmation.jsp").forward(req, resp);
+       }
         //TODO : DISTROY THE SESSION
-        session.invalidate();
+//        session.invalidate();
 
     }
 

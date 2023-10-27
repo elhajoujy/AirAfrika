@@ -55,9 +55,9 @@ public class DashboardController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        if (this.verifyAccount(req,resp)){
-            return ;
-        }
+//        if (this.verifyAccount(req,resp)){
+//            return ;
+//        }
 
 
         if (req.getServletPath().equals("/admin-delete-vol")){
@@ -124,13 +124,12 @@ public class DashboardController extends HttpServlet {
         this.isAuthentified = req.getSession().getAttribute("isAuthentified") != null;
         if (!isAuthentified){
             try {
-                req.getRequestDispatcher("views/admin/login.jsp").forward(req,resp);
+//                req.getRequestDispatcher("views/admin/login.jsp").forward(req,resp);
+                resp.sendRedirect("admin-login");
                 return true;
             } catch (IOException e) {
                 e.printStackTrace();
                 return false;
-            } catch (ServletException e) {
-                throw new RuntimeException(e);
             }
         }
 

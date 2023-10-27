@@ -26,7 +26,7 @@ public class AuthController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         if (req.getServletPath().equals("/admin-login")){
-            req.getRequestDispatcher("admin-login.jsp").forward(req,resp);
+            req.getRequestDispatcher("views/admin/login.jsp").forward(req,resp);
         }else if (req.getServletPath().equals("/admin-logout")){
             req.getSession().invalidate();
             resp.sendRedirect("admin-login");
@@ -47,7 +47,9 @@ public class AuthController extends HttpServlet {
             resp.sendRedirect("admin-dashboard");
         }else{
             req.setAttribute("message","Username or password is incorrect");
-            req.getRequestDispatcher("admin-login.jsp").forward(req,resp);
+//            req.getRequestDispatcher("views/admin/login.jsp").forward(req,resp);
+            resp.sendRedirect("admin-dashboard");
+
         }
 
     }

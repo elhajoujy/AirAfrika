@@ -117,13 +117,12 @@ public class VolDaoImpl implements VolDao {
             }
             this.transaction.commit();
 
-            hyperJpa.commitTransaction();
+            return true;
 
         } finally {
             hyperJpa.rollbackTransaction();
             hyperJpa.close();
         }
-        return false;
     }
 
     @Override
@@ -214,14 +213,15 @@ public class VolDaoImpl implements VolDao {
     @Override
     public ArrayList<VolEntity> consulterVols(HashMap<String, String> conditions) {
 //        EntityManager entityManager = this.hyperJpa.getEntityManager();
-        String jpql = "SELECT v FROM VolEntity v WHERE ";
+        String HQL = "SELECT v FROM VolEntity v WHERE ";
         for (String key : conditions.keySet()) {
-            jpql += "v." + key + " = '" + conditions.get(key) + "' AND ";
+            HQL += "v." + key + " = '" + conditions.get(key) + "' AND ";
         }
-        //remove the last AND
-        jpql = jpql.substring(0, jpql.length() - 4);
 
-        TypedQuery<VolEntity> query = entityManager.createQuery(jpql, VolEntity.class);
+        //remove the last AND
+        HQL = HQL.substring(0, HQL.length() - 4);
+
+        TypedQuery<VolEntity> query = entityManager.createQuery(HQL, VolEntity.class);
         ArrayList<VolEntity> volEntities = (ArrayList<VolEntity>) query.getResultList();
 
         return volEntities;
@@ -230,8 +230,8 @@ public class VolDaoImpl implements VolDao {
     @Override
     public Collection<VolEntity> consulterVols() {
 //        EntityManager entityManager = this.hyperJpa.getEntityManager();
-        String jpql = "SELECT v FROM VolEntity v";
-        TypedQuery<VolEntity> query = entityManager.createQuery(jpql, VolEntity.class);
+        String HQL = "SELECT v FROM VolEntity v";
+        TypedQuery<VolEntity> query = entityManager.createQuery(HQL, VolEntity.class);
         Collection<VolEntity> volEntities = query.getResultList();
         return volEntities;
     }
@@ -239,8 +239,8 @@ public class VolDaoImpl implements VolDao {
     @Override
     public boolean deleteVol(String idVol) {
         Integer id = Integer.parseInt(idVol);
-        String jpql = "DELETE FROM VolEntity v WHERE v.id = :code";
-        Query query = entityManager.createQuery(jpql);
+        String HQL = "DELETE FROM VolEntity v WHERE v.id = :code";
+        Query query = entityManager.createQuery(HQL);
         query.setParameter("code", id);
         try {
             transaction.begin();

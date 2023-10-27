@@ -21,6 +21,7 @@ public class AccountAdminServiceImpl implements AccountService {
             return null;
         }
         Account account = this.accountDao.checkLoginAccount(username,password);
+
         if (account == null){
             return null;
         }else {
